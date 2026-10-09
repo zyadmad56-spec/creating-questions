@@ -1,0 +1,96 @@
+{
+  "skill_name": "creating-questions",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Create 100 questions from my subject PDF: 50 MCQ, 45 True/False, and 5 essay questions. MCQ: 20 easy, 20 medium, 10 hard. True/False: 20 easy, 5 medium, 20 hard. Essay: 1 easy, 2 medium, 2 hard.",
+      "files": [],
+      "expectations": [
+        "If no study material is attached, asks for it in English; does not invent content",
+        "Accepts all supplied counts without reasking them",
+        "Asks for missing scope and source policy before generation",
+        "Keeps separate type sections and shuffles difficulty within them",
+        "Appends Model Answer with explanation and actual page references"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Use the entire subject PDF, with PDF-only sources. I originally requested 100 questions, but the material supports approximately 80 distinct questions. Let's adopt 80.",
+      "files": [],
+      "expectations": [
+        "Requests new type counts rather than scaling the old allocation",
+        "Then separately requests difficulty counts for each selected type",
+        "Rechecks whether hard/essay quotas are genuinely feasible",
+        "Does not pad with near-duplicates or flip negation mechanically"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Use the whole PDF plus the web and general knowledge for 6 questions: 2 MCQ, 2 True/False, 2 essays. Each type: 1 medium and 1 hard. The PDF remains the final authority when sources conflict.",
+      "files": [],
+      "expectations": [
+        "Marks external information and supplies direct sources",
+        "Verifies general knowledge and does not attribute it to PDF pages",
+        "Follows PDF course answers on conflict without asking which reference wins",
+        "Excludes PDF-internal contradictions and ambiguous items",
+        "Does not claim that answer_verified or the formatter guarantees truth"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Use the full PDF only. Make 12 MCQ questions, 4 easy, 4 medium, 4 hard. Don't let the longest option reveal the answer. I want only the student questions, without answers.",
+      "files": [],
+      "expectations": [
+        "Audits every answer internally despite student-only output",
+        "Rewrites option length and specificity cues without adding filler",
+        "No fixed equal answer-letter quotas or predictable sequence",
+        "Produces separate question section with no visible key or difficulty labels",
+        "Uses the retained Word template geometry",
+        "Keeps all interviews, questions, answers, examples, and labels in English"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Use the whole attached PDF only. It has clear text, a title page, and one image-only comparison table. Create 12 MCQ: 4 easy, 4 medium, 4 hard.",
+      "files": [],
+      "expectations": [
+        "Extracts text into task-local Markdown before considering images",
+        "Reads clear extracted evidence without rechecking every page visually",
+        "Reviews only the needed comparison table and does not treat every sparse page as requiring an image",
+        "Records actual page evidence and checks every answer"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Use the attached PPTX, slides 3-15 only, with no outside information. Create 10 True/False: 3 easy, 4 medium, 3 hard.",
+      "files": [],
+      "expectations": [
+        "Extracts slide text, tables, and existing notes without rendering every slide",
+        "Uses original slide citations rather than invented PDF pages",
+        "Uses source_only with slides/slides_inference records",
+        "Keeps the same Word template and appended Model Answer workflow"
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "Use my attached legacy .ppt slides. The environment has no presentation converter.",
+      "files": [],
+      "expectations": [
+        "Explains that .ppt conversion is unavailable and requests a readable export",
+        "Does not claim the extractor reads binary .ppt or fabricate slide evidence"
+      ]
+    },
+    {
+      "id": 8,
+      "prompt": "Use only the attached DOCX research paper, covering Methods, Results, and Discussion. Create 6 essays: 1 easy, 3 medium, 2 hard. The study reports association without establishing causation.",
+      "files": [],
+      "expectations": [
+        "Reads selected methods and limitations alongside the findings",
+        "Keeps population/assumptions/uncertainty attached to the claims they qualify",
+        "Does not convert reported association into causation or hypotheses into results",
+        "Cites actual document sections/paragraphs/tables without inventing Word pages",
+        "Uses targeted review only when necessary evidence is unclear"
+      ]
+    }
+  ]
+}
