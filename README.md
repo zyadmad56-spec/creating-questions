@@ -8,6 +8,22 @@ Turn your lecture notes into a Word question bank with multiple-choice, True/Fal
 
 The skill accepts PDFs, PowerPoint slides, and research papers. It reads extracted text first and uses a page or slide image only when needed evidence is missing or unclear. Questions, answers, prompts, and documentation are in English.
 
+## Quick install
+
+Install the skill with the [Skills CLI](https://github.com/vercel-labs/skills):
+
+```bash
+npx skills add zyadmad56-spec/creating-questions
+```
+
+For Codex, install it globally so it is available across projects:
+
+```bash
+npx skills add zyadmad56-spec/creating-questions --agent codex --global
+```
+
+Attach your material and ask the agent to use `$creating-questions`. The Python helpers also need the libraries listed in [Local Python setup](#local-python-setup).
+
 ## 1. How the workflow fits together
 
 The agent handles the conversation, reads your material, writes the questions, and checks their answers. Two Python helpers handle repeatable file operations:
