@@ -1,0 +1,140 @@
+{
+  "title": "Geometry Practice Questions",
+  "source_mode": "pdf_only",
+  "counts": {
+    "mcqs": 2,
+    "true_false": 2,
+    "essays": 2
+  },
+  "difficulty_counts": {
+    "mcqs": {
+      "easy": 1,
+      "medium": 0,
+      "hard": 1
+    },
+    "true_false": {
+      "easy": 1,
+      "medium": 1,
+      "hard": 0
+    },
+    "essays": {
+      "easy": 0,
+      "medium": 1,
+      "hard": 1
+    }
+  },
+  "mcqs": [
+    {
+      "explanation": "Compare the number of sides.",
+      "sources": [
+        {
+          "kind": "pdf",
+          "document": "practice.pdf",
+          "pdf_page": 1,
+          "evidence": "A triangle has three sides. A square has four equal sides."
+        }
+      ],
+      "answer_verified": true,
+      "question": "How many sides does a triangle have?",
+      "options": [
+        "Two sides",
+        "Three sides",
+        "Four sides",
+        "Five sides"
+      ],
+      "correct": "B",
+      "difficulty": "easy"
+    },
+    {
+      "explanation": "Compare the number of sides.",
+      "sources": [
+        {
+          "kind": "pdf",
+          "document": "practice.pdf",
+          "pdf_page": 1,
+          "evidence": "A triangle has three sides. A square has four equal sides."
+        }
+      ],
+      "answer_verified": true,
+      "question": "Which description fits a square?",
+      "options": [
+        "Four equal sides",
+        "Three equal sides",
+        "Two open sides",
+        "Five open sides"
+      ],
+      "correct": "A",
+      "difficulty": "hard"
+    }
+  ],
+  "true_false": [
+    {
+      "explanation": "Compare the number of sides.",
+      "sources": [
+        {
+          "kind": "pdf",
+          "document": "practice.pdf",
+          "pdf_page": 1,
+          "evidence": "A triangle has three sides. A square has four equal sides."
+        }
+      ],
+      "answer_verified": true,
+      "statement": "A triangle does not have four sides.",
+      "correct": "True",
+      "difficulty": "easy"
+    },
+    {
+      "explanation": "Compare the number of sides.",
+      "sources": [
+        {
+          "kind": "pdf",
+          "document": "practice.pdf",
+          "pdf_page": 1,
+          "evidence": "A triangle has three sides. A square has four equal sides."
+        }
+      ],
+      "answer_verified": true,
+      "statement": "A square has three sides.",
+      "correct": "False",
+      "correction": "A square has four equal sides.",
+      "difficulty": "medium"
+    }
+  ],
+  "essays": [
+    {
+      "explanation": "Compare the number of sides.",
+      "sources": [
+        {
+          "kind": "pdf",
+          "document": "practice.pdf",
+          "pdf_page": 1,
+          "evidence": "A triangle has three sides. A square has four equal sides."
+        }
+      ],
+      "answer_verified": true,
+      "question": "Compare triangle and square side counts.",
+      "model_answer": [
+        "A triangle has three sides.",
+        "A square has four equal sides."
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "explanation": "Compare the number of sides.",
+      "sources": [
+        {
+          "kind": "pdf",
+          "document": "practice.pdf",
+          "pdf_page": 1,
+          "evidence": "A triangle has three sides. A square has four equal sides."
+        }
+      ],
+      "answer_verified": true,
+      "question": "Explain why a four-sided shape is not a triangle.",
+      "model_answer": [
+        "A triangle must have three sides."
+      ],
+      "difficulty": "hard"
+    }
+  ]
+}
