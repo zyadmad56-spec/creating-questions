@@ -1,0 +1,330 @@
+{
+  "title": "Shape Showdown",
+  "language": "en",
+  "source_mode": "source_only",
+  "game_version": 1,
+  "counts": {
+    "mcqs": 1,
+    "true_false": 1,
+    "essays": 1
+  },
+  "difficulty_counts": {
+    "mcqs": {
+      "easy": 1,
+      "medium": 0,
+      "hard": 0
+    },
+    "true_false": {
+      "easy": 1,
+      "medium": 0,
+      "hard": 0
+    },
+    "essays": {
+      "easy": 1,
+      "medium": 0,
+      "hard": 0
+    }
+  },
+  "mcqs": [
+    {
+      "id": "m1",
+      "target_id": "triangle-sides",
+      "difficulty": "easy",
+      "answer_verified": true,
+      "sources": [
+        {
+          "kind": "document",
+          "document": "Synthetic rules.txt",
+          "locator": "Rules 1–3",
+          "evidence": "Synthetic fixture: circles have no straight sides; triangles have three straight sides; squares have four equal straight sides."
+        }
+      ],
+      "question": "How many straight sides does a triangle have?",
+      "options": [
+        "Two",
+        "Three",
+        "Four",
+        "Zero"
+      ],
+      "correct": "B",
+      "explanation": "A triangle has three straight sides. Count the straight sides, not the corners of another shape.",
+      "option_explanations": {
+        "A": "Two sides are insufficient to close a triangle.",
+        "B": "Three is the number of straight sides in a triangle.",
+        "C": "Four is the side count of a square, not a triangle.",
+        "D": "Zero straight sides describes a circle, not a triangle."
+      }
+    }
+  ],
+  "true_false": [
+    {
+      "id": "t1",
+      "target_id": "circle-straight-sides",
+      "difficulty": "easy",
+      "answer_verified": true,
+      "sources": [
+        {
+          "kind": "document",
+          "document": "Synthetic rules.txt",
+          "locator": "Rules 1–3",
+          "evidence": "Synthetic fixture: circles have no straight sides; triangles have three straight sides; squares have four equal straight sides."
+        }
+      ],
+      "statement": "A circle has a straight side.",
+      "correct": "False",
+      "explanation": "The fixture defines a circle as having no straight sides.",
+      "correction": "A circle has no straight sides."
+    }
+  ],
+  "essays": [
+    {
+      "id": "e1",
+      "target_id": "square-definition",
+      "difficulty": "easy",
+      "answer_verified": true,
+      "sources": [
+        {
+          "kind": "document",
+          "document": "Synthetic rules.txt",
+          "locator": "Rules 1–3",
+          "evidence": "Synthetic fixture: circles have no straight sides; triangles have three straight sides; squares have four equal straight sides."
+        }
+      ],
+      "question": "State the two side properties of a square.",
+      "model_answer": [
+        "A square has four straight sides.",
+        "All four sides have equal length."
+      ],
+      "explanation": "Both the count and equal lengths belong to the fixture’s definition of a square."
+    }
+  ],
+  "learning_targets": {
+    "triangle-sides": {
+      "concept_id": "triangle",
+      "angle": "side counting",
+      "label": "Triangle · count straight sides",
+      "question_type": "mcqs",
+      "difficulty": "easy",
+      "retries": [
+        {
+          "id": "m2",
+          "target_id": "triangle-sides",
+          "difficulty": "easy",
+          "answer_verified": true,
+          "sources": [
+            {
+              "kind": "document",
+              "document": "Synthetic rules.txt",
+              "locator": "Rules 1–3",
+              "evidence": "Synthetic fixture: circles have no straight sides; triangles have three straight sides; squares have four equal straight sides."
+            }
+          ],
+          "question": "A triangular sign is outlined with one strip along each edge. How many strips are needed?",
+          "options": [
+            "Two",
+            "Three",
+            "Four",
+            "Zero"
+          ],
+          "correct": "B",
+          "explanation": "A triangle has three straight sides. Count the straight sides, not the corners of another shape.",
+          "option_explanations": {
+            "A": "Two sides are insufficient to close a triangle.",
+            "B": "Three is the number of straight sides in a triangle.",
+            "C": "Four is the side count of a square, not a triangle.",
+            "D": "Zero straight sides describes a circle, not a triangle."
+          }
+        },
+        {
+          "id": "m3",
+          "target_id": "triangle-sides",
+          "difficulty": "easy",
+          "answer_verified": true,
+          "sources": [
+            {
+              "kind": "document",
+              "document": "Synthetic rules.txt",
+              "locator": "Rules 1–3",
+              "evidence": "Synthetic fixture: circles have no straight sides; triangles have three straight sides; squares have four equal straight sides."
+            }
+          ],
+          "question": "You trace a triangle, turning at each corner. How many straight segments do you draw?",
+          "options": [
+            "Two",
+            "Three",
+            "Four",
+            "Zero"
+          ],
+          "correct": "B",
+          "explanation": "A triangle has three straight sides. Count the straight sides, not the corners of another shape.",
+          "option_explanations": {
+            "A": "Two sides are insufficient to close a triangle.",
+            "B": "Three is the number of straight sides in a triangle.",
+            "C": "Four is the side count of a square, not a triangle.",
+            "D": "Zero straight sides describes a circle, not a triangle."
+          }
+        },
+        {
+          "id": "m4",
+          "target_id": "triangle-sides",
+          "difficulty": "easy",
+          "answer_verified": true,
+          "sources": [
+            {
+              "kind": "document",
+              "document": "Synthetic rules.txt",
+              "locator": "Rules 1–3",
+              "evidence": "Synthetic fixture: circles have no straight sides; triangles have three straight sides; squares have four equal straight sides."
+            }
+          ],
+          "question": "A frame is triangular. How many straight bars form its boundary?",
+          "options": [
+            "Two",
+            "Three",
+            "Four",
+            "Zero"
+          ],
+          "correct": "B",
+          "explanation": "A triangle has three straight sides. Count the straight sides, not the corners of another shape.",
+          "option_explanations": {
+            "A": "Two sides are insufficient to close a triangle.",
+            "B": "Three is the number of straight sides in a triangle.",
+            "C": "Four is the side count of a square, not a triangle.",
+            "D": "Zero straight sides describes a circle, not a triangle."
+          }
+        }
+      ]
+    },
+    "circle-straight-sides": {
+      "concept_id": "circle",
+      "angle": "straight versus curved",
+      "label": "Circle · recognize curved boundary",
+      "question_type": "true_false",
+      "difficulty": "easy",
+      "retries": [
+        {
+          "id": "t2",
+          "target_id": "circle-straight-sides",
+          "difficulty": "easy",
+          "answer_verified": true,
+          "sources": [
+            {
+              "kind": "document",
+              "document": "Synthetic rules.txt",
+              "locator": "Rules 1–3",
+              "evidence": "Synthetic fixture: circles have no straight sides; triangles have three straight sides; squares have four equal straight sides."
+            }
+          ],
+          "statement": "A circular boundary consists of curved rather than straight sides.",
+          "correct": "True",
+          "explanation": "The fixture defines a circle as having no straight sides."
+        },
+        {
+          "id": "t3",
+          "target_id": "circle-straight-sides",
+          "difficulty": "easy",
+          "answer_verified": true,
+          "sources": [
+            {
+              "kind": "document",
+              "document": "Synthetic rules.txt",
+              "locator": "Rules 1–3",
+              "evidence": "Synthetic fixture: circles have no straight sides; triangles have three straight sides; squares have four equal straight sides."
+            }
+          ],
+          "statement": "Drawing one straight segment reproduces a section of a perfect circle’s boundary.",
+          "correct": "False",
+          "explanation": "The fixture defines a circle as having no straight sides.",
+          "correction": "A circle has no straight sides."
+        },
+        {
+          "id": "t4",
+          "target_id": "circle-straight-sides",
+          "difficulty": "easy",
+          "answer_verified": true,
+          "sources": [
+            {
+              "kind": "document",
+              "document": "Synthetic rules.txt",
+              "locator": "Rules 1–3",
+              "evidence": "Synthetic fixture: circles have no straight sides; triangles have three straight sides; squares have four equal straight sides."
+            }
+          ],
+          "statement": "A round token needs a straight boundary edge to be a circle.",
+          "correct": "False",
+          "explanation": "The fixture defines a circle as having no straight sides.",
+          "correction": "A circle has no straight sides."
+        }
+      ]
+    },
+    "square-definition": {
+      "concept_id": "square",
+      "angle": "count and equality",
+      "label": "Square · side properties",
+      "question_type": "essays",
+      "difficulty": "easy",
+      "retries": [
+        {
+          "id": "e2",
+          "target_id": "square-definition",
+          "difficulty": "easy",
+          "answer_verified": true,
+          "sources": [
+            {
+              "kind": "document",
+              "document": "Synthetic rules.txt",
+              "locator": "Rules 1–3",
+              "evidence": "Synthetic fixture: circles have no straight sides; triangles have three straight sides; squares have four equal straight sides."
+            }
+          ],
+          "question": "Describe the number and lengths of the boundary edges of a square tile.",
+          "model_answer": [
+            "A square has four straight sides.",
+            "All four sides have equal length."
+          ],
+          "explanation": "Both the count and equal lengths belong to the fixture’s definition of a square."
+        },
+        {
+          "id": "e3",
+          "target_id": "square-definition",
+          "difficulty": "easy",
+          "answer_verified": true,
+          "sources": [
+            {
+              "kind": "document",
+              "document": "Synthetic rules.txt",
+              "locator": "Rules 1–3",
+              "evidence": "Synthetic fixture: circles have no straight sides; triangles have three straight sides; squares have four equal straight sides."
+            }
+          ],
+          "question": "What two side conditions must a frame meet to match the fixture’s definition of a square?",
+          "model_answer": [
+            "A square has four straight sides.",
+            "All four sides have equal length."
+          ],
+          "explanation": "Both the count and equal lengths belong to the fixture’s definition of a square."
+        },
+        {
+          "id": "e4",
+          "target_id": "square-definition",
+          "difficulty": "easy",
+          "answer_verified": true,
+          "sources": [
+            {
+              "kind": "document",
+              "document": "Synthetic rules.txt",
+              "locator": "Rules 1–3",
+              "evidence": "Synthetic fixture: circles have no straight sides; triangles have three straight sides; squares have four equal straight sides."
+            }
+          ],
+          "question": "Explain the side count and length relationship when tracing a square outline.",
+          "model_answer": [
+            "A square has four straight sides.",
+            "All four sides have equal length."
+          ],
+          "explanation": "Both the count and equal lengths belong to the fixture’s definition of a square."
+        }
+      ]
+    }
+  }
+}

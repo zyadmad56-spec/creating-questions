@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Exam Night</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Refresh game"><span class="brand-icon">✦</span> EXAM NIGHT</a>
+    <span class="tag">YOUR QUESTIONS. YOUR CREW.</span>
+    <div class="header-controls">
+      <button id="theme-toggle" class="button quiet" type="button" aria-label="Dark mode" aria-pressed="false">Dark mode</button>
+      <button id="restart" class="button quiet" type="button" hidden>Restart game</button>
+    </div>
+  </header>
+  <main>
+    <div id="error" role="alert" hidden></div>
+    <div id="app"><p class="loading">Getting the game ready…</p></div>
+  </main>
+  <footer>One screen. Everyone plays. <span>Learn it, then prove it.</span></footer>
+  <dialog id="restart-dialog" aria-labelledby="restart-title">
+    <h2 id="restart-title">Start a fresh game?</h2>
+    <p>This clears all scores, answers, and retry progress.</p>
+    <div class="actions"><button id="cancel-restart" class="button quiet">Keep playing</button><button id="confirm-restart" class="button primary">Restart game</button></div>
+  </dialog>
+</body>
+</html>

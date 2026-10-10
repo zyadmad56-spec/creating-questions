@@ -7,3 +7,7 @@ questions.json
 *.extraction.json
 .DS_Store
 Thumbs.db
+session.json
+session.json.tmp
+session.lock
+node_modules/

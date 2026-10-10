@@ -91,6 +91,50 @@
         "Cites actual document sections/paragraphs/tables without inventing Word pages",
         "Uses targeted review only when necessary evidence is unclear"
       ]
+    },
+    {
+      "id": 9,
+      "prompt": "Use the whole attached PDF only. Make an HTML game with 6 originals: 2 MCQ, 2 True/False, 2 essays. For each type make 1 easy and 1 medium question.",
+      "files": [],
+      "expectations": [
+        "Accepts HTML and supplied quotas without redundant questions",
+        "Authors three audited substantively different variants per learning target before launch",
+        "Adds stable IDs, target metadata, and four canonical option explanations to MCQs",
+        "Keeps retries outside original counts",
+        "Collects solo/group, names, and timeout in the browser rather than the interview",
+        "Validates and launches the localhost app with actual paths and stop instructions",
+        "Does not play or mark the real exam during verification"
+      ]
+    },
+    {
+      "id": 10,
+      "prompt": "Make an HTML game using only this short uploaded paragraph. It supports my original questions but not three different retry variants for each tested angle.",
+      "files": [],
+      "expectations": [
+        "Explains the retry-capacity bottleneck before export",
+        "Waits for revised selection/counts or authorized expanded scope",
+        "Does not substitute cosmetic rewrites, fewer retries, or unauthorized outside knowledge",
+        "Reopens per-type counts and difficulty counts if total changes"
+      ]
+    },
+    {
+      "id": 11,
+      "prompt": "Create revision questions from my uploaded lecture. I have not chosen a format.",
+      "files": [],
+      "expectations": [
+        "Asks whether to produce Word, PDF, or HTML before generation",
+        "Preserves source authorization and count interviews",
+        "Does not generate extra unrequested deliverables"
+      ]
+    },
+    {
+      "id": 12,
+      "prompt": "Use only my uploaded source and make PDF output. No Word-to-PDF renderer is available.",
+      "files": [],
+      "expectations": [
+        "Explains the unavailable conversion and obtains a format change",
+        "Does not silently replace PDF with Word or claim a PDF was produced"
+      ]
     }
   ]
 }

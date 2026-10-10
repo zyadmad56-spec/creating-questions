@@ -1,4 +1,4 @@
 interface:
   display_name: "Creating Questions"
-  short_description: "Word question banks from PDFs, slides, and papers"
-  default_prompt: "Use $creating-questions to turn my uploaded PDF, slides, or research paper into a Word question bank with difficulty counts per type and a cited Model Answer table."
+  short_description: "Source-checked Word, PDF, and local exam games"
+  default_prompt: "Use $creating-questions to make source-checked exam questions from my uploaded material, with difficulty counts per type; ask whether I want Word, PDF, or a local HTML game."

@@ -1,5 +1,7 @@
 # Question data for the Word formatter
 
+This base schema also supplies originals for HTML mode. When HTML is selected, read [html-game.md](html-game.md) for required IDs, learning targets, alternate questions, and option explanations. Existing Word/PDF banks do not need those additional fields.
+
 Save UTF-8 JSON in a task working directory. The template is resolved relative to the skill directory; use a Python environment with `python-docx`. Banks missing quotas or evidence are rejected; complete the audit before export.
 
 ## Bank settings

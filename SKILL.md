@@ -1,11 +1,11 @@
 ---
 name: creating-questions
-description: Create a source-checked Word question bank from uploaded PDFs, PowerPoint slides, or research papers, with MCQ, True/False, essays, difficulty counts per type, and a cited Model Answer table. Use for revision questions or exams based on supplied study material.
+description: Create source-checked Word or PDF question banks and local HTML exam games from uploaded PDFs, slides, or research papers, with MCQ, True/False, essays, and difficulty counts per type. Use for revision questions or exams based on supplied study material.
 ---
 
 # Creating Questions
 
-Turn uploaded study material into a Word question bank using `assets/Creating Questions.docx`. Accept PDFs, PowerPoint slides, and research papers in readable PDF, DOCX, Markdown, or text form. Questions come first, in separate type sections, followed by a **Model Answer** table in the same file. Preserve the user's counts; quality and verified support take priority over padding the bank.
+Turn uploaded study material into a Word/PDF question bank using `assets/Creating Questions.docx`, or a local HTML exam game. Accept PDFs, PowerPoint slides, and research papers in readable PDF, DOCX, Markdown, or text form. Document outputs put questions first in separate type sections, followed by a **Model Answer** table. HTML mode reveals answers after the host locks responses and revisits missed learning targets after the exam. Preserve the user's counts; quality and verified support take priority over padding the bank.
 
 ## Interview and settings
 
@@ -13,11 +13,12 @@ Use English for the interview, instructions, examples, questions, options, expla
 
 If no study material is present, ask for it. Once available, gather these settings in order, one stage at a time:
 
-1. **Scope:** whole file or specific chapters, pages, slides, or paper sections. For multiple files, establish which files belong to the scope. Clarify PDF page index versus printed page numbering if ambiguous.
-2. **Total:** ask how many questions the user wants.
-3. **Types:** MCQ only, True/False only, essay only, or mixed. For mixed, ask for exact counts of each type; require their sum to equal the total. Unselected types have count zero.
-4. **Difficulty per type:** for each selected type, separately ask for **integer counts** of easy, medium, and hard questions. For example: "For your 50 MCQ questions, how many should be easy, medium, and hard?" Then ask the same for True/False, then essay as applicable. Check each sum against its type count. Do not replace this with one difficulty percentage for the entire bank.
-5. **Sources:** every run must establish the user's choice: "Should I use only the uploaded material, or also the web and general knowledge?" For a PDF, "PDF only" is equivalent to uploaded-material-only mode. Do not browse or use outside facts before the choice is known. An explicit choice in the current request satisfies this step.
+1. **Output:** Word, PDF, or HTML game. Ask when missing; accept an explicit choice without asking again. For HTML, collect play mode, names, and timer in the browser at startup, not in this interview.
+2. **Scope:** whole file or specific chapters, pages, slides, or paper sections. For multiple files, establish which files belong to the scope. Clarify PDF page index versus printed page numbering if ambiguous.
+3. **Total:** ask how many questions the user wants.
+4. **Types:** MCQ only, True/False only, essay only, or mixed. For mixed, ask for exact counts of each type; require their sum to equal the total. Unselected types have count zero.
+5. **Difficulty per type:** for each selected type, separately ask for **integer counts** of easy, medium, and hard questions. For example: "For your 50 MCQ questions, how many should be easy, medium, and hard?" Then ask the same for True/False, then essay as applicable. Check each sum against its type count. Do not replace this with one difficulty percentage for the entire bank.
+6. **Sources:** every run must establish the user's choice: "Should I use only the uploaded material, or also the web and general knowledge?" For a PDF, "PDF only" is equivalent to uploaded-material-only mode. Do not browse or use outside facts before the choice is known. An explicit choice in the current request satisfies this step.
 
 When a sum is wrong, show the discrepancy and ask only for the necessary correction. When all settings are supplied, proceed without a redundant confirmation. If the user explicitly supplies percentages, convert to integers and confirm rounding for each affected type rather than silently choosing it.
 
@@ -90,9 +91,17 @@ For every question, solve it again from the actual cited source independently of
 
 Repair or replace unsupported/ambiguous items, then audit their replacements. If there are too few valid replacements, use the capacity renegotiation above. Only mark `answer_verified: true` after inspecting supporting evidence. This flag records the agent's completed audit; it does **not** prove truth automatically. Never claim guaranteed 100% infallibility.
 
-## Export and final checks
+## HTML game export
 
-Default output is a `.docx` named after the subject, with the appended **Model Answer** table: question number, correct answer, short explanation/correction, and sources. Include MCQ letter plus option text; essay answers list required points. Hide answers, evidence, references, and difficulty labels in the questions section. Use continuous numbering across sections and matching table rows. Separate type sections start on new pages after the first. Keep question stems with their response lines or options; use explicit A-D labels without an extra automatic bullet.
+When HTML is selected, read [references/html-game.md](references/html-game.md) before authoring. Apply the shared source audit to originals and three materially distinct variants per learning target. Include canonical-option explanations for every MCQ. Estimate capacity for the complete retry pools and renegotiate insufficient material before export.
+
+Save the audited game JSON and actual launch commands in a user-writable task-local directory. Validate and run `scripts/serve_exam_game.py`; check the browser setup without playing the user's exam on their behalf. Give the localhost URL, launch commands, and shutdown instructions. The game requires the installed skill's scripts/assets and Python, with no runtime AI, external assets, or Discord integration. Produce only the selected deliverable; HTML does not require a Word/PDF export.
+
+## Document export and final checks
+
+Apply this section for Word/PDF output.
+
+Word output is a `.docx` named after the subject, with the appended **Model Answer** table: question number, correct answer, short explanation/correction, and sources. Include MCQ letter plus option text; essay answers list required points. Hide answers, evidence, references, and difficulty labels in the questions section. Use continuous numbering across sections and matching table rows. Separate type sections start on new pages after the first. Keep question stems with their response lines or options; use explicit A-D labels without an extra automatic bullet.
 
 Use the same academic template and format for PDF, slide, and paper inputs. Identify uploaded documents once beside the answer key as S1, S2, and so on. Table rows use those IDs with actual page/slide/section locators, keeping source cells short. Repeat the table header across pages and use 10-point answer-table text. Keep necessary supporting citations for deductions and direct URLs for external sources.
 
@@ -106,4 +115,4 @@ The formatter enforces structural counts, source records, required answers, and 
 
 Preserve the bundled template's page geometry, heading/list styles, and answer-table style. Render the DOCX and inspect all pages for numbering, unclipped options, readable English text and tables, and page breaks. If no rendering tool is available, perform structural checks and disclose the visual-check limitation; do not claim visual verification.
 
-If explicitly requested, provide a PDF or a student-only file (`include_answer_key: false`). Keep the internal audited answers even in student-only mode. Do not generate extra deliverables unless requested.
+For PDF mode, convert the audited Word intermediate using an available renderer. If conversion is unavailable, explain and obtain a format change rather than silently delivering Word. For an explicitly requested student-only document, use `include_answer_key: false`. Keep the internal audited answers even in student-only mode. Do not generate extra deliverables unless requested.
