@@ -24,7 +24,7 @@ This document records the agreed implementation plan. Separate-device Wi-Fi play
 
 - Browser setup collects solo/group mode, player names, and one positive integer duration in seconds. Solo requires one player; group requires at least two. Reject blank or duplicate names.
 - Use a quiz-show presentation: large questions, visible timer, named player cards, scores, and winner display. Use local assets without external fonts, scripts, or services.
-- Default to white and blue. Add a Dark mode/Light mode button in the header for a navy-and-blue alternative. Remember the theme in browser local storage when available; switching must preserve current answers, unsaved drafts, timer state, scores, and review position. Theme preference is independent of session resets.
+- Default to white and blue. Add a Dark mode/Light mode button in the header for near-black backgrounds, charcoal panels, and red accents. Remember the theme in browser local storage when available; switching must preserve current answers, unsaved drafts, timer state, scores, and review position. Theme preference is independent of session resets.
 - Use a clock-style countdown with a dial and minutes/seconds (hours when needed).
 - Preserve MCQ → True/False → essay sections, omitting unused types. Shuffle questions within sections and shuffle MCQ options while preserving answer and explanation correspondence.
 - Start the timer when a question appears. The host records each player's answer; entries remain editable until lock.

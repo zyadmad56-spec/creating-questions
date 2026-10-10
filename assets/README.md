@@ -12,4 +12,4 @@ To change the document's appearance, edit the template's styles and page setup, 
 
 `exam-game/` contains the local game's HTML, CSS, and JavaScript, served by the Python runner. Course questions come from the authored exam JSON. No external assets or build step are required.
 
-The interface defaults to white and blue, with a header button for dark navy and blue. Theme colors are CSS variables in `style.css`; `app.js` stores the browser preference under `exam-night-theme`. Theme changes do not call the game API. The countdown clock and paused question review work in both themes.
+The interface defaults to white and blue, with a header button for near-black and charcoal with red accents. Theme colors are CSS variables in `style.css`; `app.js` stores the browser preference under `exam-night-theme`. Theme changes do not call the game API. The countdown clock and paused question review work in both themes.

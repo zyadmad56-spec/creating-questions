@@ -65,7 +65,7 @@ The first browser screen collects solo/group mode, names, and seconds per questi
 
 ## Host flow and limits
 
-- The interface starts in white and blue. The header's Dark mode/Light mode button switches to navy and blue or back. The browser saves this preference when local storage is available; toggling it preserves answers, drafts, scores, and timer state. It is independent of session resets.
+- The interface starts in white and blue. The header's Dark mode/Light mode button switches to near-black and charcoal with red accents, or back. The browser saves this preference when local storage is available; toggling it preserves answers, drafts, scores, and timer state. It is independent of session resets.
 - The host shares one screen, optionally through Discord. Friends answer aloud or in shared chat, and the host saves their responses. There is no Discord connector or separate-device joining.
 - Originals use MCQ → True/False → essay sections, shuffled within each section. Correct originals earn one point; essay correctness is decided by the host against the model answer, without partial credit.
 - Pause freezes only the timer; answer entry remains usable. Expiry leaves answers hidden and permits host entry. An early lock requires every answer; after expiry, blanks become timeouts on lock. Save draft responses before locking.

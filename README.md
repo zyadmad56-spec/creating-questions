@@ -51,7 +51,7 @@ The game runs on the host's device and opens in a browser. Choose solo or group 
 
 Friends share the host's screen, optionally through Discord. They answer aloud or in shared chat, and the host records their responses in the player cards. This version uses one browser session; friends do not join from separate devices.
 
-The interface starts in white and blue. Use **Dark mode** in the header to switch to navy and blue, or **Light mode** to switch back. The browser remembers your choice when local storage is available. Switching themes leaves the game and any unsaved responses intact.
+The interface starts in white and blue. Use **Dark mode** in the header for a near-black background, charcoal panels, and red accents, or **Light mode** to switch back. The browser remembers your choice when local storage is available. Switching themes leaves the game and any unsaved responses intact.
 
 ### During a question
 
