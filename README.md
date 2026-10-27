@@ -4,9 +4,9 @@
 ![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)
 ![Tests](https://github.com/zyadmad56-spec/creating-questions/actions/workflows/tests.yml/badge.svg)
 
-Turn your lecture notes into a Word question bank with multiple-choice, True/False, and essay questions. Set the counts and difficulty for each type, then use the Model Answer table to check your work against the uploaded material.
+Turn your lecture notes into a Word question bank with multiple-choice, True/False, and essay questions. Set the counts and difficulty for each type, then use the Model Answer table to check your work against the uploaded material. For programming material, the bank adds shared code blocks with their own line-number gutters, function/API questions, code-writing essays, and locally executed answer verification.
 
-The skill accepts PDFs, PowerPoint slides, and research papers. It reads extracted text first and uses a page or slide image only when needed evidence is missing or unclear. Questions, answers, prompts, and documentation are in English.
+The skill accepts PDFs, PowerPoint slides, and research papers. It reads extracted text first and uses a page or slide image only when needed evidence is missing or unclear. Deliverables are Word, PDF, or both — the PDF is converted from the finalized Word file, never redrawn. Questions, answers, prompts, and documentation are in English.
 
 ## Quick install
 
@@ -76,17 +76,25 @@ The Model Answer table comes after all questions:
 
 The key identifies uploaded files once as S1, S2, and so on. Rows use those short IDs instead of repeating a long filename. The table uses 10-point text and repeats its header across pages. The formatter preserves the template's page size, margins, heading/list styles, and table style.
 
-A student-only document is available when you explicitly request it. The agent still checks the answers internally. PDF output requires an available document renderer and an explicit request.
+A student-only document is available when you explicitly request it. The agent still checks the answers internally. PDF output requires an available local renderer (Microsoft Word via COM, or LibreOffice) and an explicit request; the PDF is converted from the same finalized Word file, so its order, numbers, and answers always match. When no converter is available the agent keeps the DOCX and reports the unmet PDF requirement.
+
+### Document formats
+
+**Classic** preserves the academic template exactly and is the default for existing banks. **Card** adds code-specific design for programming banks: a light header bar (`Code Block 1 — Questions 1 to 4` / `Language: Python 3.x`), a dark Monokai code area (or a print-friendly light variant), syntax coloring that never changes the characters, a separate per-block line-number gutter, inline code chips in prompts and options, and choices laid out two by two when short or one per row when long.
+
+Code stays real, selectable text. Selecting the code column (click in the first code line, extend to the last) and copying yields exactly the program — the gutter numbers are a separate table column and are not part of the code text. Copying the full card includes the numbers by design. Saved custom formats live in a local, git-ignored `formats/` library; see [saved formats](references/saved-formats.md).
 
 ## 3. The conversation before generation
 
-Attach the material and invoke `$creating-questions`. The agent collects these settings one stage at a time:
+Attach the material and invoke `$creating-questions`. The agent first asks two appearance questions — "Would you like Word, PDF, or both? Which document format should I use: a saved format, your reference/template, Classic, or Card?" — and then collects these settings one stage at a time:
 
 1. Which files, chapters, pages, slides, or paper sections to cover.
 2. The total number of questions.
 3. MCQ, True/False, essay, or a mixed bank. A mixed bank needs exact counts per type.
 4. Easy, medium, and hard counts separately for each selected type.
 5. Uploaded material only, or uploaded material plus the web and general knowledge.
+
+If the material contains programming, the interview extends: shared code blocks, function/API questions, or a mixture; per-difficulty block counts, questions per block, and approximate code size; whether hard shared blocks may contain linked questions (asked once, remembered locally, changeable anytime); and, for code essays, which of the four styles (scenario, complete-the-code, find-and-fix, trace/explain) with counts and difficulty per style.
 
 The agent uses settings you've already supplied and asks only for what's missing. Each type's difficulty counts must add up to its question count, and the type counts must add up to the total.
 
@@ -141,9 +149,9 @@ python scripts/extract_source_markdown.py slides.pptx work/slides.md
 python scripts/extract_source_markdown.py paper.docx work/paper.md
 ```
 
-Each run writes Markdown and an `.extraction.json` report. The helper preserves original source identifiers, leaves the input unchanged, and renders no images. A scan or image-only slide gets a review notice rather than invented text. The agent decides which selected units need local OCR, another parser, or a targeted visual check.
+Each run writes Markdown and an `.extraction.json` report. The helper preserves original source identifiers, leaves the input unchanged, and renders no images. When the material contains code, the report additionally lists recovered code candidates (with detected language and evidence, printed display-number labels mapped to line indexes, and a review status), a construct inventory per language, and Python syntax-check results. For PDFs, `--layout auto` (or explicit pages such as `--layout 4,7`) re-extracts only code-bearing pages in layout mode so flattened indentation can be recovered under its own locator. A scan or image-only slide gets a review notice rather than invented text. The agent decides which selected units need local OCR, another parser, or a targeted visual check.
 
-The extractor does not perform OCR, interpret pictures, fully decode SmartArt, or guarantee complete equation/table extraction. A page with readable text can still contain a needed figure. See [source reading](references/source-reading.md) for the checks and citation rules.
+The extractor does not perform OCR, interpret pictures, fully decode SmartArt, or guarantee complete equation/table extraction. Recovered code is recovery assistance, not proof of correct syntax or reading order. See [source reading](references/source-reading.md) for the checks and citation rules.
 
 ### Audited question data and Word export
 
@@ -153,9 +161,13 @@ The JSON records counts, difficulty, answers, explanations, evidence, and locato
 
 ```bash
 python scripts/create_question_bank_docx.py questions.json Subject_Question_Bank.docx
+python scripts/create_question_bank_docx.py questions.json Subject_Question_Bank.docx \
+    --format builtin-card --variant monokai
+python scripts/create_question_bank_docx.py questions.json Subject_Question_Bank.docx \
+    --format builtin-card --pdf Subject_Question_Bank.pdf
 ```
 
-The formatter rejects count mismatches, missing evidence, invalid answers, malformed locators, unauthorized source kinds, and normalized duplicate stems before writing the output. It does not detect all semantic duplicates or establish whether citations support an answer. The agent checks the cited evidence and compares what each question tests.
+The formatter rejects count mismatches, missing evidence, invalid answers, malformed locators, unauthorized source kinds, inconsistent groups or dependencies, and normalized duplicate stems before writing the output. Version-2 banks (with `schema_version: 2`) add stable IDs, code blocks, groups, dependency chains, essay styles, and execution records; legacy JSON keeps working unchanged. A render manifest (`Subject_Question_Bank.manifest.json`) is saved beside the DOCX with the final order, option letters, block/line numbers, and code hashes — a PDF request converts that same document rather than reshuffling. The formatter does not detect all semantic duplicates or establish whether citations support an answer. The agent checks the cited evidence and compares what each question tests.
 
 Use `source_only` or `source_web_general` for mixed document formats. Existing `pdf_only` and `pdf_web_general` banks remain supported. Read the [JSON schema and source examples](references/question-data.md) before assembling a bank.
 
@@ -169,19 +181,39 @@ creating-questions/
   SKILL.md                         # Agent workflow and question rules
   LICENSE
   requirements.txt
+  requirements-dev.txt             # Optional Windows COM dependencies
   agents/openai.yaml               # Skill display and default prompt
   assets/Creating Questions.docx    # Academic Word template
   scripts/
-    extract_source_markdown.py     # Text extraction with source locators
-    create_question_bank_docx.py   # Validation, shuffling, and Word export
+    extract_source_markdown.py     # Text extraction, code recovery, language detection
+    create_question_bank_docx.py   # CLI: validation, shuffling, Word/PDF export
+    qbank_interview.py             # Interview contract and local settings
+    qbank_blueprint.py             # Capacity and block allocation
+    qbank_schema.py                # Schema v1/v2 model, validation, variants
+    qbank_order.py                 # Final ordering, references, render manifest
+    qbank_formats.py               # Built-in and saved format profiles
+    qbank_render.py                # Card code cards, chips, DOCX-to-PDF
+    qbank_document.py              # Version-2 document assembly
+    qbank_execution.py             # Screened local execution of variants
   references/
-    source-reading.md              # Reading paths and targeted review
-    question-data.md               # JSON schema and citation records
+    source-reading.md              # Reading paths, code recovery, targeted review
+    question-data.md               # Legacy and version-2 JSON schemas
+    programming-interview.md       # Programming interview contract
+    programming-design.md          # Programming authoring rules
+    programming-execution.md       # Execution and audit contract
+    saved-formats.md               # Format profiles and local settings
+    troubleshooting.md             # Recovery steps
   evals/
+    test_formatter.py              # Legacy validation and Word correspondence
     test_extraction.py             # Parser behavior and source preservation
-    test_formatter.py              # Validation and saved Word correspondence
-    evals.json                    # Agent behavior scenarios
-    files/sample_questions.json    # Synthetic formatter fixture
+    test_interview.py              # Interview fixtures and settings persistence
+    test_blueprint.py              # Capacity allocation
+    test_schema.py                 # Model validation and ordering
+    test_code_recovery.py          # Code recovery fixtures
+    test_execution.py              # Screened execution
+    test_layout.py                 # Card layout, formats, PDF path
+    ACCEPTANCE-REPORT.md           # Plan 0.1 acceptance matrix results
+    files/                         # Synthetic public fixtures
   .github/workflows/tests.yml
 ```
 
@@ -237,6 +269,8 @@ Install the helper dependencies:
 python -m pip install -r requirements.txt
 ```
 
+Optional, Windows only: `python -m pip install -r requirements-dev.txt` adds `pywin32` for Word COM PDF conversion and the automated copy checks. Without it, Word output still works and PDF conversion is reported as unavailable.
+
 This is an agent skill with file-processing helpers. It does not provide a standalone AI question generator or a hosted service. Your agent reads `SKILL.md` and performs the interview, authoring, and source audit.
 
 ### Example requests
@@ -255,15 +289,21 @@ The agent asks only for settings missing from the request. Attaching a file or i
 
 ## 6. Tests and practical limits
 
-Run both functional suites from a writable folder:
+Run the functional suites from a writable folder:
 
 ```bash
 python evals/test_formatter.py
 python evals/test_extraction.py
+python evals/test_interview.py
+python evals/test_blueprint.py
+python evals/test_schema.py
+python evals/test_code_recovery.py
+python evals/test_execution.py
+python evals/test_layout.py
 ```
 
-The tests check extraction locators, tables/notes, input preservation, scanned-page notices, mode restrictions, difficulty quotas, duplicate rejection, shuffled answer correspondence, template geometry, and Word citation layout. They use synthetic data. They do not establish factual correctness for a real course, full extraction of every possible file, or visual layout in every Word viewer.
+The tests check extraction locators and code recovery, tables/notes, input preservation, mode restrictions, difficulty quotas, group/dependency rules, seeded ordering with stable references, interview fixtures and settings persistence, screened execution (output, exceptions, timeouts, refusals), Card layout and saved-format round trips, and Word citation layout. They use synthetic data only. They do not establish factual correctness for a real course, full extraction of every possible file, OS-level sandboxing, or visual layout in every Word/PDF viewer; the recorded copy and conversion evidence lives in `evals/files/copy_prototype/PROTOTYPE-REPORT.md` and `evals/ACCEPTANCE-REPORT.md`.
 
-GitHub Actions runs the suites for pushes and pull requests on Windows and Ubuntu with Python 3.10 and 3.12. The workflow tests the helpers; it does not publish generated banks.
+GitHub Actions runs the suites for pushes and pull requests on Windows and Ubuntu with Python 3.10 and 3.12. Renderer and compiler integrations (Word COM, gcc) are exercised only where available and are reported honestly elsewhere. The workflow tests the helpers; it does not publish generated banks.
 
 OCR, legacy PPT conversion, and Word-to-PDF rendering depend on tools available in the agent's environment. Difficult layouts need targeted review. A source audit reduces errors but does not justify a promise of 100% infallibility.

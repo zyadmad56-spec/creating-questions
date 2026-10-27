@@ -103,13 +103,15 @@ Default output is a `.docx` named after the subject, with the appended **Model A
 
 Use the same academic template and format for PDF, slide, and paper inputs. Identify uploaded documents once beside the answer key as S1, S2, and so on. Table rows use those IDs with actual page/slide/section locators, keeping source cells short. Repeat the table header across pages and use 10-point answer-table text. Keep necessary supporting citations for deductions and direct URLs for external sources.
 
-Read [references/question-data.md](references/question-data.md) before assembling the formatter JSON. For DOCX production use available bundled `python-docx` dependencies and document rendering tools. Run:
+Read [references/question-data.md](references/question-data.md) before assembling the formatter JSON — it documents both the legacy shape and schema version 2 (stable IDs, code blocks, groups, dependencies, essay styles, execution records). For programming banks also read [references/programming-design.md](references/programming-design.md) and build a capacity blueprint with `scripts/qbank_blueprint.py`. For DOCX production use available bundled `python-docx` dependencies and document rendering tools. Run:
 
 ```text
 python scripts/create_question_bank_docx.py questions.json Subject_Question_Bank.docx
 ```
 
-The formatter enforces structural counts, source records, required answers, and normalized text uniqueness; it shuffles questions/options while preserving key correspondence. It does **not** read the source, generate questions, judge semantic difficulty, verify factual correctness, or detect all paraphrased duplicates. The extraction helper does not OCR, interpret images, or guarantee complete extraction. Those checks remain the agent's responsibility.
+Optional flags: `--format classic` (default) or a Card/saved format id, `--variant monokai|print` for Card, and `--pdf OUTPUT_PDF` to convert the finalized DOCX to PDF. The requested deliverable (Word, PDF, or both) comes from the interview; PDF is always converted from the same finalized Word document — the render manifest (saved beside the DOCX) records the order, block numbers, option letters, and code hashes, and a retry reuses it instead of reshuffling. When no local Word/LibreOffice converter is available, the DOCX is kept and the unmet PDF requirement is reported; never substitute a separately drawn PDF. See [references/saved-formats.md](references/saved-formats.md) and [references/troubleshooting.md](references/troubleshooting.md).
+
+The formatter enforces structural counts, source records, required answers, group/dependency consistency, and normalized text uniqueness; it shuffles render units (code groups stay atomic) and options while preserving key correspondence. It does **not** read the source, generate questions, judge semantic difficulty, verify factual correctness, or detect all paraphrased duplicates. `scripts/qbank_execution.py` runs audited educational variants locally under a strict screen (no network, no processes, no file access) and records honest execution status; it is evidence, not a sandbox for untrusted code. Those checks remain the agent's responsibility.
 
 Preserve the bundled template's page geometry, heading/list styles, and answer-table style. Render the DOCX and inspect all pages for numbering, unclipped options, readable English text and tables, and page breaks. If no rendering tool is available, perform structural checks and disclose the visual-check limitation; do not claim visual verification.
 

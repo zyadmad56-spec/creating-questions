@@ -1,4 +1,4 @@
 interface:
   display_name: "Creating Questions"
-  short_description: "Word question banks from PDFs, slides, and papers"
-  default_prompt: "Use $creating-questions to turn my uploaded PDF, slides, or research paper into a Word question bank with difficulty counts per type and a cited Model Answer table."
+  short_description: "Word/PDF question banks from PDFs, slides, and papers - with code blocks"
+  default_prompt: "Use $creating-questions to turn my uploaded PDF, slides, or research paper into a question bank with difficulty counts per type and a cited Model Answer table. Programming material gets shared code blocks, function/API questions, code essays, and locally verified answers. Deliverable can be Word, PDF, or both."
