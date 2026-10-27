@@ -1,0 +1,31 @@
+{
+  "name": "block density larger than any type total is infeasible",
+  "supplied": {
+    "scope": "Pages 1-6",
+    "deliverables": "docx",
+    "format": "classic",
+    "source_mode": "source_only",
+    "total": 6,
+    "mcqs": 6,
+    "true_false": 0,
+    "essays": 0,
+    "difficulty_counts": {
+      "mcqs": {"easy": 2, "medium": 2, "hard": 2},
+      "true_false": {"easy": 0, "medium": 0, "hard": 0},
+      "essays": {"easy": 0, "medium": 0, "hard": 0}
+    },
+    "programming": {
+      "content_mode": "shared_code",
+      "languages": ["python"],
+      "blocks": {
+        "easy": {"count": 1, "questions_per_block": 3, "approx_code_lines": 10},
+        "medium": {"count": 1, "questions_per_block": 3, "approx_code_lines": 20},
+        "hard": {"count": 1, "questions_per_block": 3, "approx_code_lines": 30}
+      },
+      "allow_hard_dependencies": true
+    }
+  },
+  "remembered": null,
+  "expect": "mismatch",
+  "error_contains": "more than the largest"
+}

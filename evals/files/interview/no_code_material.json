@@ -1,0 +1,21 @@
+{
+  "name": "no-code material follows the existing interview",
+  "supplied": {
+    "scope": "Whole paper",
+    "deliverables": "docx",
+    "format": "classic",
+    "source_mode": "source_only",
+    "total": 5,
+    "mcqs": 3,
+    "true_false": 2,
+    "essays": 0,
+    "difficulty_counts": {
+      "mcqs": {"easy": 1, "medium": 1, "hard": 1},
+      "true_false": {"easy": 1, "medium": 1, "hard": 0},
+      "essays": {"easy": 0, "medium": 0, "hard": 0}
+    }
+  },
+  "remembered": null,
+  "expect": "ok",
+  "assert": {"programming": null}
+}

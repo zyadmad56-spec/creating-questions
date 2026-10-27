@@ -4,6 +4,9 @@ __pycache__/
 work/
 questions.json
 *_Question_Bank.docx
+*_Question_Bank.pdf
 *.extraction.json
+settings.json
+formats/
 .DS_Store
 Thumbs.db

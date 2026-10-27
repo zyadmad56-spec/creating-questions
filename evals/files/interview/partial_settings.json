@@ -1,0 +1,12 @@
+{
+  "name": "partial settings report every missing item without inventing any",
+  "supplied": {
+    "total": 10,
+    "mcqs": 5,
+    "true_false": 3,
+    "essays": 2
+  },
+  "remembered": null,
+  "expect": "missing",
+  "missing_count": 5
+}

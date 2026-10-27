@@ -11,8 +11,9 @@ Turn uploaded study material into a Word question bank using `assets/Creating Qu
 
 Use English for the interview, instructions, examples, questions, options, explanations, model answers, headings, and source labels. Read non-English material accurately and express the questions and answers in English without changing meaning. Preserve original document identifiers and direct source URLs. Internal extraction keeps original text for verification. Accept settings already supplied without asking again. Do not silently fill missing count, difficulty, or source choices.
 
-If no study material is present, ask for it. Once available, gather these settings in order, one stage at a time:
+If no study material is present, ask for it. Once available, establish the deliverable and appearance, then gather these settings in order, one stage at a time:
 
+0. **Deliverable and format:** ask "Would you like Word, PDF, or both? Which document format should I use: a saved format, your reference/template, Classic, or Card?" Reuse an explicit request without asking again. With no request, offer the existing Word default while asking; do not silently generate an extra PDF. If Card is chosen, establish Monokai or the print-friendly variant. List saved format names when available. Output file type and visual theme are separate settings; a remembered format can be offered first, and the user may choose differently for every new bank.
 1. **Scope:** whole file or specific chapters, pages, slides, or paper sections. For multiple files, establish which files belong to the scope. Clarify PDF page index versus printed page numbering if ambiguous.
 2. **Total:** ask how many questions the user wants.
 3. **Types:** MCQ only, True/False only, essay only, or mixed. For mixed, ask for exact counts of each type; require their sum to equal the total. Unselected types have count zero.
@@ -20,6 +21,12 @@ If no study material is present, ask for it. Once available, gather these settin
 5. **Sources:** every run must establish the user's choice: "Should I use only the uploaded material, or also the web and general knowledge?" For a PDF, "PDF only" is equivalent to uploaded-material-only mode. Do not browse or use outside facts before the choice is known. An explicit choice in the current request satisfies this step.
 
 When a sum is wrong, show the discrepancy and ask only for the necessary correction. When all settings are supplied, proceed without a redundant confirmation. If the user explicitly supplies percentages, convert to integers and confirm rounding for each affected type rather than silently choosing it.
+
+## Programming material
+
+Extract enough source text first to detect programming content and the language(s) actually used; do not ask the user which language a plainly readable source uses, and never treat language detection as permission to browse. Programming support applies to every detected language (Python, C/C++, C#, Java, JavaScript, SQL, NoSQL, and others); record the language/standard/dialect per code block instead of silently reinterpreting one language as another.
+
+If the material contains programming, read [references/programming-interview.md](references/programming-interview.md) and extend the interview: choose the content mode (shared code blocks, function/API questions, or a mixture), gather block counts/questions-per-block/approximate code size **per difficulty**, ask the once-remembered hard-dependency preference, and interview code-essay styles (scenario, completion, bug-fix, trace/explain) with counts and per-style difficulty when essays include programming. A source without runnable code can still support function/API questions; a source without programming concepts never becomes a programming bank. Persist the remembered preference in the local, git-ignored `settings.json` at the skill root; missing settings mean ask, never silently enable.
 
 ## Read the source without unnecessary images
 

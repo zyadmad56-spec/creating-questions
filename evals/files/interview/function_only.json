@@ -1,0 +1,28 @@
+{
+  "name": "function/API-only material needs no block interview",
+  "supplied": {
+    "scope": "Slides 1-20",
+    "deliverables": "docx",
+    "format": {"profile_id": "card", "variant": "print"},
+    "source_mode": "source_only",
+    "total": 8,
+    "mcqs": 5,
+    "true_false": 1,
+    "essays": 2,
+    "difficulty_counts": {
+      "mcqs": {"easy": 2, "medium": 2, "hard": 1},
+      "true_false": {"easy": 0, "medium": 1, "hard": 0},
+      "essays": {"easy": 1, "medium": 0, "hard": 1}
+    },
+    "programming": {
+      "content_mode": "function_api",
+      "languages": ["python"]
+    }
+  },
+  "remembered": null,
+  "expect": "ok",
+  "assert": {
+    "programming.blocks": {},
+    "hard_dependency": null
+  }
+}

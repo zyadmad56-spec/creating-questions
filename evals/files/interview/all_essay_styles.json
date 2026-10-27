@@ -1,0 +1,34 @@
+{
+  "name": "all four code-essay styles reconcile with essay quotas",
+  "supplied": {
+    "scope": "Pages 2-9",
+    "deliverables": ["docx", "pdf"],
+    "format": {"profile_id": "card", "variant": "monokai"},
+    "source_mode": "source_only",
+    "total": 12,
+    "mcqs": 4,
+    "true_false": 2,
+    "essays": 6,
+    "difficulty_counts": {
+      "mcqs": {"easy": 1, "medium": 2, "hard": 1},
+      "true_false": {"easy": 1, "medium": 1, "hard": 0},
+      "essays": {"easy": 1, "medium": 3, "hard": 2}
+    },
+    "programming": {
+      "content_mode": "function_api",
+      "languages": ["python"],
+      "essay_styles": {"scenario": 2, "completion": 2, "bug_fix": 1, "trace_explain": 1},
+      "essay_style_difficulty_counts": {
+        "scenario": {"easy": 0, "medium": 1, "hard": 1},
+        "completion": {"easy": 1, "medium": 1, "hard": 0},
+        "bug_fix": {"easy": 0, "medium": 1, "hard": 0},
+        "trace_explain": {"easy": 0, "medium": 0, "hard": 1}
+      }
+    }
+  },
+  "remembered": null,
+  "expect": "ok",
+  "assert": {
+    "programming.conventional_essay_counts": {"easy": 0, "medium": 0, "hard": 0}
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "name": "remembered hard-dependency preference is applied without asking",
+  "supplied": {
+    "scope": "Pages 1-10",
+    "deliverables": "docx",
+    "format": "classic",
+    "source_mode": "pdf_only",
+    "total": 8,
+    "mcqs": 4,
+    "true_false": 2,
+    "essays": 2,
+    "difficulty_counts": {
+      "mcqs": {"easy": 2, "medium": 1, "hard": 1},
+      "true_false": {"easy": 1, "medium": 1, "hard": 0},
+      "essays": {"easy": 0, "medium": 1, "hard": 1}
+    },
+    "programming": {
+      "content_mode": "shared_code",
+      "languages": ["python"],
+      "blocks": {
+        "easy": {"count": 1, "questions_per_block": 2, "approx_code_lines": 10},
+        "hard": {"count": 1, "questions_per_block": 2, "approx_code_lines": 14}
+      }
+    }
+  },
+  "remembered": {"settings_version": 1, "allow_hard_dependencies": false},
+  "expect": "ok",
+  "assert": {
+    "hard_dependency.effective": false,
+    "hard_dependency.must_ask": false,
+    "hard_dependency.applied_remembered": true
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "name": "an empty request lists all required settings",
+  "supplied": {},
+  "remembered": null,
+  "expect": "missing",
+  "missing_count": 9
+}

@@ -1,0 +1,43 @@
+{
+  "name": "complete supplied programming settings",
+  "supplied": {
+    "scope": "All uploaded pages",
+    "deliverables": ["docx", "pdf"],
+    "format": {"profile_id": "card", "variant": "monokai"},
+    "source_mode": "source_only",
+    "total": 12,
+    "mcqs": 6,
+    "true_false": 2,
+    "essays": 4,
+    "difficulty_counts": {
+      "mcqs": {"easy": 2, "medium": 2, "hard": 2},
+      "true_false": {"easy": 1, "medium": 0, "hard": 1},
+      "essays": {"easy": 1, "medium": 2, "hard": 1}
+    },
+    "programming": {
+      "content_mode": "mixed",
+      "languages": ["python"],
+      "blocks": {
+        "easy": {"count": 1, "questions_per_block": 2, "approx_code_lines": 10},
+        "medium": {"count": 1, "questions_per_block": 2, "approx_code_lines": 12},
+        "hard": {"count": 1, "questions_per_block": 2, "approx_code_lines": 15}
+      },
+      "allow_hard_dependencies": true,
+      "essay_styles": {"scenario": 1, "completion": 1, "bug_fix": 1, "trace_explain": 1},
+      "essay_style_difficulty_counts": {
+        "scenario": {"easy": 1, "medium": 0, "hard": 0},
+        "completion": {"easy": 0, "medium": 1, "hard": 0},
+        "bug_fix": {"easy": 0, "medium": 1, "hard": 0},
+        "trace_explain": {"easy": 0, "medium": 0, "hard": 1}
+      }
+    }
+  },
+  "remembered": null,
+  "expect": "ok",
+  "assert": {
+    "programming.shared_question_target": 6,
+    "hard_dependency.effective": true,
+    "hard_dependency.applied_remembered": false,
+    "programming.conventional_essay_counts": {"easy": 0, "medium": 0, "hard": 0}
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "name": "essay style matrix that contradicts its style totals is rejected",
+  "supplied": {
+    "scope": "Pages 1-8",
+    "deliverables": "docx",
+    "format": "classic",
+    "source_mode": "source_only",
+    "total": 10,
+    "mcqs": 4,
+    "true_false": 2,
+    "essays": 4,
+    "difficulty_counts": {
+      "mcqs": {"easy": 1, "medium": 2, "hard": 1},
+      "true_false": {"easy": 1, "medium": 1, "hard": 0},
+      "essays": {"easy": 1, "medium": 2, "hard": 1}
+    },
+    "programming": {
+      "content_mode": "function_api",
+      "languages": ["python"],
+      "essay_styles": {"scenario": 2, "completion": 2},
+      "essay_style_difficulty_counts": {
+        "scenario": {"easy": 1, "medium": 1, "hard": 1},
+        "completion": {"easy": 1, "medium": 1, "hard": 0}
+      }
+    }
+  },
+  "remembered": null,
+  "expect": "mismatch",
+  "error_contains": "style scenario"
+}

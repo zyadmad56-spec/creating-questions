@@ -1,0 +1,33 @@
+{
+  "name": "mixed-language material records each language",
+  "supplied": {
+    "scope": "Pages 1-12",
+    "deliverables": "docx",
+    "format": "classic",
+    "source_mode": "source_only",
+    "total": 8,
+    "mcqs": 4,
+    "true_false": 2,
+    "essays": 2,
+    "difficulty_counts": {
+      "mcqs": {"easy": 2, "medium": 1, "hard": 1},
+      "true_false": {"easy": 1, "medium": 1, "hard": 0},
+      "essays": {"easy": 0, "medium": 1, "hard": 1}
+    },
+    "programming": {
+      "content_mode": "shared_code",
+      "languages": ["python", "sql"],
+      "blocks": {
+        "easy": {"count": 2, "questions_per_block": 2, "approx_code_lines": 10}
+      },
+      "allow_hard_dependencies": false
+    }
+  },
+  "remembered": null,
+  "expect": "ok",
+  "assert": {
+    "programming.languages": ["python", "sql"],
+    "programming.shared_question_target": 4,
+    "hard_dependency.effective": false
+  }
+}
