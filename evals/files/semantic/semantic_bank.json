@@ -1,0 +1,1061 @@
+{
+  "schema_version": 2,
+  "title": "Synthetic Semantic Evaluation Bank",
+  "language": "en",
+  "source_mode": "source_only",
+  "counts": {
+    "mcqs": 7,
+    "true_false": 2,
+    "essays": 4
+  },
+  "difficulty_counts": {
+    "mcqs": {
+      "easy": 4,
+      "medium": 0,
+      "hard": 3
+    },
+    "true_false": {
+      "easy": 1,
+      "medium": 1,
+      "hard": 0
+    },
+    "essays": {
+      "easy": 2,
+      "medium": 1,
+      "hard": 1
+    }
+  },
+  "include_answer_key": true,
+  "programming": {
+    "allow_hard_dependencies": true,
+    "content_mode": "mixed",
+    "languages": [
+      "python"
+    ]
+  },
+  "deliverables": [
+    "docx"
+  ],
+  "format": {
+    "profile_id": "builtin-card",
+    "variant": "monokai"
+  },
+  "code_blocks": [
+    {
+      "id": "b_counter",
+      "language": "python",
+      "version_hint": "3.x",
+      "origin": "authored_from_source",
+      "review_status": "recovered",
+      "lines": [
+        {
+          "id": "L1",
+          "text": "class Counter:"
+        },
+        {
+          "id": "L2",
+          "text": "    def __init__(self, value):"
+        },
+        {
+          "id": "L3",
+          "text": "        self.value = value"
+        },
+        {
+          "id": "L4",
+          "text": "    def advance(self):"
+        },
+        {
+          "id": "L5",
+          "text": "        self.value += 3"
+        },
+        {
+          "id": "L6",
+          "text": "        return self.value"
+        },
+        {
+          "id": "L7",
+          "text": "c = Counter(4)"
+        }
+      ],
+      "sources": [
+        {
+          "kind": "document",
+          "document": "Synthetic teaching premises",
+          "locator": "CODE-SAMPLES.md, Synthetic teaching premises",
+          "evidence": "Synthetic teaching premises (public fixture): Python constructors initialize instance attributes; methods access self; return passes a value without printing it; print writes its arguments; each independent question starts from the original code; range(1, n + 1) includes integers 1 through n; % gives the remainder; // is integer division for positive operands. The API premises teach isna(), sum(), dropna(), head(), and describe()."
+        }
+      ]
+    },
+    {
+      "id": "b_counter_trace",
+      "language": "python",
+      "version_hint": "3.x",
+      "origin": "authored_from_source",
+      "review_status": "recovered",
+      "lines": [
+        {
+          "id": "L1",
+          "text": "class Counter:"
+        },
+        {
+          "id": "L2",
+          "text": "    def __init__(self, value):"
+        },
+        {
+          "id": "L3",
+          "text": "        self.value = value"
+        },
+        {
+          "id": "L4",
+          "text": "    def advance(self):"
+        },
+        {
+          "id": "L5",
+          "text": "        self.value += 3"
+        },
+        {
+          "id": "L6",
+          "text": "        return self.value"
+        },
+        {
+          "id": "L7",
+          "text": "c = Counter(4)"
+        }
+      ],
+      "sources": [
+        {
+          "kind": "document",
+          "document": "Synthetic teaching premises",
+          "locator": "CODE-SAMPLES.md, Synthetic teaching premises",
+          "evidence": "Synthetic teaching premises (public fixture): Python constructors initialize instance attributes; methods access self; return passes a value without printing it; print writes its arguments; each independent question starts from the original code; range(1, n + 1) includes integers 1 through n; % gives the remainder; // is integer division for positive operands. The API premises teach isna(), sum(), dropna(), head(), and describe()."
+        }
+      ]
+    },
+    {
+      "id": "b_score",
+      "language": "python",
+      "version_hint": "3.x",
+      "origin": "authored_from_source",
+      "review_status": "recovered",
+      "lines": [
+        {
+          "id": "L1",
+          "text": "def score(n):"
+        },
+        {
+          "id": "L2",
+          "text": "    total = 0"
+        },
+        {
+          "id": "L3",
+          "text": "    for i in range(1, n + 1):"
+        },
+        {
+          "id": "L4",
+          "text": "        if i % 2 == 0:"
+        },
+        {
+          "id": "L5",
+          "text": "            total += i * i"
+        },
+        {
+          "id": "L6",
+          "text": "        else:"
+        },
+        {
+          "id": "L7",
+          "text": "            total -= 1"
+        },
+        {
+          "id": "L8",
+          "text": "    return total"
+        }
+      ],
+      "sources": [
+        {
+          "kind": "document",
+          "document": "Synthetic teaching premises",
+          "locator": "CODE-SAMPLES.md, Synthetic teaching premises",
+          "evidence": "Synthetic teaching premises (public fixture): Python constructors initialize instance attributes; methods access self; return passes a value without printing it; print writes its arguments; each independent question starts from the original code; range(1, n + 1) includes integers 1 through n; % gives the remainder; // is integer division for positive operands. The API premises teach isna(), sum(), dropna(), head(), and describe()."
+        }
+      ]
+    },
+    {
+      "id": "b_completion",
+      "language": "python",
+      "version_hint": "3.x",
+      "origin": "authored_from_source",
+      "review_status": "intentionally_incomplete",
+      "lines": [
+        {
+          "id": "L1",
+          "text": "class CourseRecord:"
+        },
+        {
+          "id": "L2",
+          "text": "    def __init__(self, hours):"
+        },
+        {
+          "id": "L3",
+          "text": "        self.hours = hours"
+        },
+        {
+          "id": "L4",
+          "text": ""
+        },
+        {
+          "id": "L5",
+          "text": "    def read_hours(self):"
+        },
+        {
+          "id": "L6",
+          "text": "        return ______"
+        }
+      ],
+      "sources": [
+        {
+          "kind": "document",
+          "document": "Synthetic teaching premises",
+          "locator": "CODE-SAMPLES.md, Synthetic teaching premises",
+          "evidence": "Synthetic teaching premises (public fixture): Python constructors initialize instance attributes; methods access self; return passes a value without printing it; print writes its arguments; each independent question starts from the original code; range(1, n + 1) includes integers 1 through n; % gives the remainder; // is integer division for positive operands. The API premises teach isna(), sum(), dropna(), head(), and describe()."
+        }
+      ]
+    },
+    {
+      "id": "b_bugfix",
+      "language": "python",
+      "version_hint": "3.x",
+      "origin": "authored_from_source",
+      "review_status": "intentionally_invalid",
+      "lines": [
+        {
+          "id": "L1",
+          "text": "class CourseRecord:"
+        },
+        {
+          "id": "L2",
+          "text": "    def __init__(self, hours):"
+        },
+        {
+          "id": "L3",
+          "text": "        self.hours = hours"
+        },
+        {
+          "id": "L4",
+          "text": ""
+        },
+        {
+          "id": "L5",
+          "text": "    def read_hours(self):"
+        },
+        {
+          "id": "L6",
+          "text": "        return self.hours"
+        },
+        {
+          "id": "L7",
+          "text": ""
+        },
+        {
+          "id": "L8",
+          "text": "record = CourseRecord(3)"
+        },
+        {
+          "id": "L9",
+          "text": "print(record.read_hours)"
+        }
+      ],
+      "sources": [
+        {
+          "kind": "document",
+          "document": "Synthetic teaching premises",
+          "locator": "CODE-SAMPLES.md, Synthetic teaching premises",
+          "evidence": "Synthetic teaching premises (public fixture): Python constructors initialize instance attributes; methods access self; return passes a value without printing it; print writes its arguments; each independent question starts from the original code; range(1, n + 1) includes integers 1 through n; % gives the remainder; // is integer division for positive operands. The API premises teach isna(), sum(), dropna(), head(), and describe()."
+        }
+      ]
+    }
+  ],
+  "groups": [
+    {
+      "id": "g_counter",
+      "type": "mcqs",
+      "difficulty": "easy",
+      "code_block_id": "b_counter",
+      "dependency_mode": "independent",
+      "question_ids": [
+        "q_value",
+        "q_return",
+        "q_advance"
+      ]
+    },
+    {
+      "id": "g_score",
+      "type": "mcqs",
+      "difficulty": "hard",
+      "code_block_id": "b_score",
+      "dependency_mode": "linked",
+      "question_ids": [
+        "q_score_a",
+        "q_score_b",
+        "q_score_final"
+      ],
+      "dependencies": [
+        {
+          "question_id": "q_score_b",
+          "depends_on": [
+            "q_score_a"
+          ]
+        },
+        {
+          "question_id": "q_score_final",
+          "depends_on": [
+            "q_score_a",
+            "q_score_b"
+          ]
+        }
+      ]
+    }
+  ],
+  "mcqs": [
+    {
+      "id": "q_value",
+      "question": "Starting from Code Block {{block:b_counter}}, what is printed if `print(c.value)` is appended?",
+      "difficulty": "easy",
+      "options": [
+        {
+          "id": "o_v4",
+          "text": "4"
+        },
+        {
+          "id": "o_v7",
+          "text": "7"
+        },
+        {
+          "id": "o_vnone",
+          "text": "No output"
+        },
+        {
+          "id": "o_verr",
+          "text": "AttributeError"
+        }
+      ],
+      "correct_option_id": "o_v4",
+      "explanation": "The constructor stores 4; nothing has advanced it.",
+      "answer_verified": true,
+      "sources": [
+        {
+          "kind": "document",
+          "document": "Synthetic teaching premises",
+          "locator": "CODE-SAMPLES.md, Synthetic teaching premises",
+          "evidence": "Synthetic teaching premises (public fixture): Python constructors initialize instance attributes; methods access self; return passes a value without printing it; print writes its arguments; each independent question starts from the original code; range(1, n + 1) includes integers 1 through n; % gives the remainder; // is integer division for positive operands. The API premises teach isna(), sum(), dropna(), head(), and describe()."
+        }
+      ],
+      "execution": {
+        "question_id": "q_value",
+        "program_hash": "b5f07a626863ec2ff7e21a306adcaab6c1f73ebb32dcf12e1e2b6d84481c62e8",
+        "runtime": {
+          "language": "python",
+          "version": "3.14.7",
+          "executable": "C:\\Users\\ziad emad\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "enforcement": "static educational screen + isolated interpreter (-I) + temp working directory + timeout"
+        },
+        "status": "passed",
+        "execution_verified": true,
+        "reason": null,
+        "cases": [
+          {
+            "observation": {
+              "exit_status": 0,
+              "stdout": "4\n",
+              "stderr": "",
+              "timeout": false
+            }
+          }
+        ]
+      },
+      "code_block_id": "b_counter",
+      "variant": {
+        "base_block_id": "b_counter",
+        "reset": true,
+        "operations": [
+          {
+            "op": "append",
+            "text": "print(c.value)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "q_return",
+      "question": "Starting from Code Block {{block:b_counter}}, what is printed if only `c.advance()` is appended?",
+      "difficulty": "easy",
+      "options": [
+        {
+          "id": "o_r4",
+          "text": "4"
+        },
+        {
+          "id": "o_r7",
+          "text": "7"
+        },
+        {
+          "id": "o_rnone",
+          "text": "None"
+        },
+        {
+          "id": "o_rsilent",
+          "text": "No output"
+        }
+      ],
+      "correct_option_id": "o_rsilent",
+      "explanation": "advance returns 7 but the appended statement does not print it.",
+      "answer_verified": true,
+      "sources": [
+        {
+          "kind": "document",
+          "document": "Synthetic teaching premises",
+          "locator": "CODE-SAMPLES.md, Synthetic teaching premises",
+          "evidence": "Synthetic teaching premises (public fixture): Python constructors initialize instance attributes; methods access self; return passes a value without printing it; print writes its arguments; each independent question starts from the original code; range(1, n + 1) includes integers 1 through n; % gives the remainder; // is integer division for positive operands. The API premises teach isna(), sum(), dropna(), head(), and describe()."
+        }
+      ],
+      "execution": {
+        "question_id": "q_return",
+        "program_hash": "226ad86161b9f637988b49e78b899d2fd8f0db5afdb98db0d5fd9f776bbfc5fe",
+        "runtime": {
+          "language": "python",
+          "version": "3.14.7",
+          "executable": "C:\\Users\\ziad emad\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "enforcement": "static educational screen + isolated interpreter (-I) + temp working directory + timeout"
+        },
+        "status": "passed",
+        "execution_verified": true,
+        "reason": null,
+        "cases": [
+          {
+            "observation": {
+              "exit_status": 0,
+              "stdout": "",
+              "stderr": "",
+              "timeout": false
+            }
+          }
+        ]
+      },
+      "code_block_id": "b_counter",
+      "variant": {
+        "base_block_id": "b_counter",
+        "reset": true,
+        "operations": [
+          {
+            "op": "append",
+            "text": "c.advance()"
+          }
+        ]
+      }
+    },
+    {
+      "id": "q_advance",
+      "question": "Starting from Code Block {{block:b_counter}}, what is printed if `print(c.advance())` is appended?",
+      "difficulty": "easy",
+      "options": [
+        {
+          "id": "o_a4",
+          "text": "4"
+        },
+        {
+          "id": "o_a7",
+          "text": "7"
+        },
+        {
+          "id": "o_anone",
+          "text": "No output"
+        },
+        {
+          "id": "o_aerr",
+          "text": "TypeError"
+        }
+      ],
+      "correct_option_id": "o_a7",
+      "explanation": "advance adds 3 to 4 and the print displays the returned 7.",
+      "answer_verified": true,
+      "sources": [
+        {
+          "kind": "document",
+          "document": "Synthetic teaching premises",
+          "locator": "CODE-SAMPLES.md, Synthetic teaching premises",
+          "evidence": "Synthetic teaching premises (public fixture): Python constructors initialize instance attributes; methods access self; return passes a value without printing it; print writes its arguments; each independent question starts from the original code; range(1, n + 1) includes integers 1 through n; % gives the remainder; // is integer division for positive operands. The API premises teach isna(), sum(), dropna(), head(), and describe()."
+        }
+      ],
+      "execution": {
+        "question_id": "q_advance",
+        "program_hash": "66eafa57341f2036b6836421af0a1d797d51b04e86aaa815fc8f5a617ffa45c0",
+        "runtime": {
+          "language": "python",
+          "version": "3.14.7",
+          "executable": "C:\\Users\\ziad emad\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "enforcement": "static educational screen + isolated interpreter (-I) + temp working directory + timeout"
+        },
+        "status": "passed",
+        "execution_verified": true,
+        "reason": null,
+        "cases": [
+          {
+            "observation": {
+              "exit_status": 0,
+              "stdout": "7\n",
+              "stderr": "",
+              "timeout": false
+            }
+          }
+        ]
+      },
+      "code_block_id": "b_counter",
+      "variant": {
+        "base_block_id": "b_counter",
+        "reset": true,
+        "operations": [
+          {
+            "op": "append",
+            "text": "print(c.advance())"
+          }
+        ]
+      }
+    },
+    {
+      "id": "q_isna",
+      "question": "Which pandas expression counts missing cells separately for each column of the DataFrame `data`, using the taught missing-value check?",
+      "difficulty": "easy",
+      "options": [
+        {
+          "id": "o_i1",
+          "text": "`data.describe()`"
+        },
+        {
+          "id": "o_i2",
+          "text": "`data.head()`"
+        },
+        {
+          "id": "o_i3",
+          "text": "`data.isna().sum()`"
+        },
+        {
+          "id": "o_i4",
+          "text": "`data.dropna()`"
+        }
+      ],
+      "correct_option_id": "o_i3",
+      "explanation": "isna flags missing cells and sum counts the True flags per column; describe summarizes, head previews, dropna removes rows.",
+      "answer_verified": true,
+      "sources": [
+        {
+          "kind": "document",
+          "document": "Synthetic teaching premises",
+          "locator": "CODE-SAMPLES.md, Synthetic teaching premises",
+          "evidence": "Synthetic teaching premises (public fixture): Python constructors initialize instance attributes; methods access self; return passes a value without printing it; print writes its arguments; each independent question starts from the original code; range(1, n + 1) includes integers 1 through n; % gives the remainder; // is integer division for positive operands. The API premises teach isna(), sum(), dropna(), head(), and describe()."
+        }
+      ],
+      "execution": {
+        "status": "not_applicable",
+        "execution_verified": false,
+        "reason": "Conceptual API question with no executable variant; verified through the source premises.",
+        "cases": []
+      }
+    },
+    {
+      "id": "q_score_a",
+      "question": "Using Code Block {{block:b_score}}, what is `a` after `a = score(4)`?",
+      "difficulty": "hard",
+      "options": [
+        {
+          "id": "o_s18",
+          "text": "18"
+        },
+        {
+          "id": "o_s20",
+          "text": "20"
+        },
+        {
+          "id": "o_s16",
+          "text": "16"
+        },
+        {
+          "id": "o_s4",
+          "text": "4"
+        }
+      ],
+      "correct_option_id": "o_s18",
+      "explanation": "score(4) = -1 + 4 - 1 + 16 = 18.",
+      "answer_verified": true,
+      "sources": [
+        {
+          "kind": "document",
+          "document": "Synthetic teaching premises",
+          "locator": "CODE-SAMPLES.md, Synthetic teaching premises",
+          "evidence": "Synthetic teaching premises (public fixture): Python constructors initialize instance attributes; methods access self; return passes a value without printing it; print writes its arguments; each independent question starts from the original code; range(1, n + 1) includes integers 1 through n; % gives the remainder; // is integer division for positive operands. The API premises teach isna(), sum(), dropna(), head(), and describe()."
+        }
+      ],
+      "execution": {
+        "question_id": "q_score_a",
+        "program_hash": "dc4936708b75f8745d0bf5777b8daa46863133ff59ec6a94f034b08734a8d5d6",
+        "runtime": {
+          "language": "python",
+          "version": "3.14.7",
+          "executable": "C:\\Users\\ziad emad\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "enforcement": "static educational screen + isolated interpreter (-I) + temp working directory + timeout"
+        },
+        "status": "passed",
+        "execution_verified": true,
+        "reason": null,
+        "cases": [
+          {
+            "observation": {
+              "exit_status": 0,
+              "stdout": "18\n",
+              "stderr": "",
+              "timeout": false
+            }
+          }
+        ]
+      },
+      "code_block_id": "b_score",
+      "variant": {
+        "base_block_id": "b_score",
+        "reset": true,
+        "operations": [
+          {
+            "op": "append",
+            "text": "print(score(4))"
+          }
+        ]
+      }
+    },
+    {
+      "id": "q_score_b",
+      "question": "Using the correct value of `a` from the previous question, what is `b` after `b = score(a // 3)`?",
+      "difficulty": "hard",
+      "options": [
+        {
+          "id": "o_t20",
+          "text": "20"
+        },
+        {
+          "id": "o_t53",
+          "text": "53"
+        },
+        {
+          "id": "o_t18",
+          "text": "18"
+        },
+        {
+          "id": "o_t36",
+          "text": "36"
+        }
+      ],
+      "correct_option_id": "o_t53",
+      "explanation": "a = 18 and 18 // 3 = 6; score(6) = 53.",
+      "answer_verified": true,
+      "sources": [
+        {
+          "kind": "document",
+          "document": "Synthetic teaching premises",
+          "locator": "CODE-SAMPLES.md, Synthetic teaching premises",
+          "evidence": "Synthetic teaching premises (public fixture): Python constructors initialize instance attributes; methods access self; return passes a value without printing it; print writes its arguments; each independent question starts from the original code; range(1, n + 1) includes integers 1 through n; % gives the remainder; // is integer division for positive operands. The API premises teach isna(), sum(), dropna(), head(), and describe()."
+        }
+      ],
+      "execution": {
+        "question_id": "q_score_b",
+        "program_hash": "0201a8a7b8c41fb8e00d410c41a784ed7721ffd3f99c66f7d3f5a6724e8c1ef9",
+        "runtime": {
+          "language": "python",
+          "version": "3.14.7",
+          "executable": "C:\\Users\\ziad emad\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "enforcement": "static educational screen + isolated interpreter (-I) + temp working directory + timeout"
+        },
+        "status": "passed",
+        "execution_verified": true,
+        "reason": null,
+        "cases": [
+          {
+            "observation": {
+              "exit_status": 0,
+              "stdout": "53\n",
+              "stderr": "",
+              "timeout": false
+            }
+          }
+        ]
+      },
+      "code_block_id": "b_score",
+      "variant": {
+        "base_block_id": "b_score",
+        "reset": true,
+        "operations": [
+          {
+            "op": "append",
+            "text": "print(score(18 // 3))"
+          }
+        ]
+      },
+      "depends_on": [
+        "q_score_a"
+      ]
+    },
+    {
+      "id": "q_score_final",
+      "question": "Using the correct values of `a` and `b`, what does `print(a + b, score(b % 5))` display?",
+      "difficulty": "hard",
+      "options": [
+        {
+          "id": "o_u1",
+          "text": "71 2"
+        },
+        {
+          "id": "o_u2",
+          "text": "71 3"
+        },
+        {
+          "id": "o_u3",
+          "text": "53 2"
+        },
+        {
+          "id": "o_u4",
+          "text": "18 53"
+        }
+      ],
+      "correct_option_id": "o_u1",
+      "explanation": "a + b = 71 and score(53 % 5) = score(3) = 2.",
+      "answer_verified": true,
+      "sources": [
+        {
+          "kind": "document",
+          "document": "Synthetic teaching premises",
+          "locator": "CODE-SAMPLES.md, Synthetic teaching premises",
+          "evidence": "Synthetic teaching premises (public fixture): Python constructors initialize instance attributes; methods access self; return passes a value without printing it; print writes its arguments; each independent question starts from the original code; range(1, n + 1) includes integers 1 through n; % gives the remainder; // is integer division for positive operands. The API premises teach isna(), sum(), dropna(), head(), and describe()."
+        }
+      ],
+      "execution": {
+        "question_id": "q_score_final",
+        "program_hash": "6daa1081d98e30cee359113f131b2d71df0374394e8732ca5e41317c9f93366f",
+        "runtime": {
+          "language": "python",
+          "version": "3.14.7",
+          "executable": "C:\\Users\\ziad emad\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "enforcement": "static educational screen + isolated interpreter (-I) + temp working directory + timeout"
+        },
+        "status": "passed",
+        "execution_verified": true,
+        "reason": null,
+        "cases": [
+          {
+            "observation": {
+              "exit_status": 0,
+              "stdout": "71 2\n",
+              "stderr": "",
+              "timeout": false
+            }
+          }
+        ]
+      },
+      "code_block_id": "b_score",
+      "variant": {
+        "base_block_id": "b_score",
+        "reset": true,
+        "operations": [
+          {
+            "op": "append",
+            "text": "print(18 + 53, score(53 % 5))"
+          }
+        ]
+      },
+      "depends_on": [
+        "q_score_a",
+        "q_score_b"
+      ]
+    }
+  ],
+  "true_false": [
+    {
+      "id": "q_tf_advance",
+      "statement": "In the Counter program, calling `c.advance()` once changes `c.value` from 4 to 7.",
+      "correct": "True",
+      "difficulty": "easy",
+      "explanation": "advance adds 3 to the stored value.",
+      "answer_verified": true,
+      "sources": [
+        {
+          "kind": "document",
+          "document": "Synthetic teaching premises",
+          "locator": "CODE-SAMPLES.md, Synthetic teaching premises",
+          "evidence": "Synthetic teaching premises (public fixture): Python constructors initialize instance attributes; methods access self; return passes a value without printing it; print writes its arguments; each independent question starts from the original code; range(1, n + 1) includes integers 1 through n; % gives the remainder; // is integer division for positive operands. The API premises teach isna(), sum(), dropna(), head(), and describe()."
+        }
+      ],
+      "execution": {
+        "status": "not_applicable",
+        "execution_verified": false,
+        "reason": "Conceptual premise covered by the executed variants.",
+        "cases": []
+      }
+    },
+    {
+      "id": "q_tf_print",
+      "statement": "According to the synthetic premises, a method that returns a value also prints it.",
+      "correct": "False",
+      "difficulty": "medium",
+      "correction": "return passes a value back without printing it; print writes to the terminal.",
+      "explanation": "The executed q_return variant confirms no output when only c.advance() is appended.",
+      "answer_verified": true,
+      "sources": [
+        {
+          "kind": "document",
+          "document": "Synthetic teaching premises",
+          "locator": "CODE-SAMPLES.md, Synthetic teaching premises",
+          "evidence": "Synthetic teaching premises (public fixture): Python constructors initialize instance attributes; methods access self; return passes a value without printing it; print writes its arguments; each independent question starts from the original code; range(1, n + 1) includes integers 1 through n; % gives the remainder; // is integer division for positive operands. The API premises teach isna(), sum(), dropna(), head(), and describe()."
+        }
+      ],
+      "execution": {
+        "status": "not_applicable",
+        "execution_verified": false,
+        "reason": "Verified through the executed q_return variant.",
+        "cases": []
+      }
+    }
+  ],
+  "essays": [
+    {
+      "id": "q_essay_scenario",
+      "question": "A course record stores a course name and credit hours. Write class `CourseRecord` with a constructor accepting both values, method `get_hours()` returning its current hours, and method `set_hours(hours)` replacing them. Create one record and demonstrate reading the hours before and after one update.",
+      "essay_style": "scenario",
+      "difficulty": "easy",
+      "model_answer": [
+        "Constructor stores both values.",
+        "get_hours returns the current hours.",
+        "set_hours replaces the hours.",
+        "A correct demonstration runs."
+      ],
+      "reference_solution": "class CourseRecord:\n    def __init__(self, name, hours):\n        self.name = name\n        self.hours = hours\n\n    def get_hours(self):\n        return self.hours\n\n    def set_hours(self, hours):\n        self.hours = hours\n\nrecord = CourseRecord(\"AI\", 3)\nprint(record.get_hours())\nrecord.set_hours(5)\nprint(record.get_hours())",
+      "test_cases": [
+        {
+          "description": "initial 3 then update to 5",
+          "expected": "3\n5"
+        },
+        {
+          "description": "initial 2 then update to 2",
+          "expected": "2\n2"
+        }
+      ],
+      "explanation": "State, return, mutation, and demonstration.",
+      "answer_verified": true,
+      "sources": [
+        {
+          "kind": "document",
+          "document": "Synthetic teaching premises",
+          "locator": "CODE-SAMPLES.md, Synthetic teaching premises",
+          "evidence": "Synthetic teaching premises (public fixture): Python constructors initialize instance attributes; methods access self; return passes a value without printing it; print writes its arguments; each independent question starts from the original code; range(1, n + 1) includes integers 1 through n; % gives the remainder; // is integer division for positive operands. The API premises teach isna(), sum(), dropna(), head(), and describe()."
+        }
+      ],
+      "execution": {
+        "status": "passed",
+        "execution_verified": true,
+        "reason": null,
+        "program_hash": "3994092c5ca0e769c012fd50c8030567f1a68d95dce55a6c7b3e93cc90a2acfe",
+        "cases": [
+          {
+            "description": "reference solution",
+            "expected_stdout": "3\n5\n",
+            "observed": {
+              "exit_status": 0,
+              "stdout": "3\n5\n",
+              "stderr": "",
+              "timeout": false
+            },
+            "match": true
+          }
+        ],
+        "runtime": {
+          "language": "python",
+          "version": "3.14.7",
+          "executable": "C:\\Users\\ziad emad\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "enforcement": "static educational screen + isolated interpreter (-I) + temp working directory + timeout"
+        }
+      }
+    },
+    {
+      "id": "q_essay_completion",
+      "question": "Complete the missing expression in Code Block {{block:b_completion}} so `read_hours()` returns the hours stored in this instance, and explain the instance reference.",
+      "essay_style": "completion",
+      "difficulty": "easy",
+      "code_block_id": "b_completion",
+      "model_answer": [
+        "`self.hours` is the missing expression.",
+        "self refers to the instance whose method was called."
+      ],
+      "reference_solution": "self.hours",
+      "test_cases": [
+        {
+          "description": "CourseRecord(3).read_hours()",
+          "expected": "3"
+        },
+        {
+          "description": "CourseRecord(0).read_hours()",
+          "expected": "0"
+        }
+      ],
+      "explanation": "The instance reference is required to reach the attribute.",
+      "answer_verified": true,
+      "sources": [
+        {
+          "kind": "document",
+          "document": "Synthetic teaching premises",
+          "locator": "CODE-SAMPLES.md, Synthetic teaching premises",
+          "evidence": "Synthetic teaching premises (public fixture): Python constructors initialize instance attributes; methods access self; return passes a value without printing it; print writes its arguments; each independent question starts from the original code; range(1, n + 1) includes integers 1 through n; % gives the remainder; // is integer division for positive operands. The API premises teach isna(), sum(), dropna(), head(), and describe()."
+        }
+      ],
+      "execution": {
+        "status": "passed",
+        "execution_verified": true,
+        "reason": null,
+        "program_hash": "a0ca012932ee6425b2efcd0e3ef3a5a4fc84901d8bb055f26acc174542581a9b",
+        "cases": [
+          {
+            "description": "completed gap",
+            "expected_stdout": "3\n0\n",
+            "observed": {
+              "exit_status": 0,
+              "stdout": "3\n0\n",
+              "stderr": "",
+              "timeout": false
+            },
+            "match": true
+          }
+        ],
+        "runtime": {
+          "language": "python",
+          "version": "3.14.7",
+          "executable": "C:\\Users\\ziad emad\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "enforcement": "static educational screen + isolated interpreter (-I) + temp working directory + timeout"
+        }
+      }
+    },
+    {
+      "id": "q_essay_bugfix",
+      "question": "The final line of Code Block {{block:b_bugfix}} is intended to print the value returned by `read_hours()`. Correct that line and explain the mistake.",
+      "essay_style": "bug_fix",
+      "difficulty": "medium",
+      "code_block_id": "b_bugfix",
+      "model_answer": [
+        "The line must call the method: `print(record.read_hours())`.",
+        "The original refers to the method object instead of calling it."
+      ],
+      "reference_solution": "print(record.read_hours())",
+      "test_cases": [
+        {
+          "description": "fixed line with hours=3",
+          "expected": "3"
+        },
+        {
+          "description": "fixed line with hours=0",
+          "expected": "0"
+        }
+      ],
+      "explanation": "Calling the method evaluates it; the bare name is the bound method.",
+      "answer_verified": true,
+      "sources": [
+        {
+          "kind": "document",
+          "document": "Synthetic teaching premises",
+          "locator": "CODE-SAMPLES.md, Synthetic teaching premises",
+          "evidence": "Synthetic teaching premises (public fixture): Python constructors initialize instance attributes; methods access self; return passes a value without printing it; print writes its arguments; each independent question starts from the original code; range(1, n + 1) includes integers 1 through n; % gives the remainder; // is integer division for positive operands. The API premises teach isna(), sum(), dropna(), head(), and describe()."
+        }
+      ],
+      "execution": {
+        "status": "passed",
+        "execution_verified": true,
+        "reason": null,
+        "program_hash": "d73f24db9ccbbb90d112a947636c100a60a5f0a80fe0de1e9b3df001dbba5f3e",
+        "cases": [
+          {
+            "description": "repaired line",
+            "expected_stdout": "3\n",
+            "observed": {
+              "exit_status": 0,
+              "stdout": "3\n",
+              "stderr": "",
+              "timeout": false
+            },
+            "match": true
+          }
+        ],
+        "runtime": {
+          "language": "python",
+          "version": "3.14.7",
+          "executable": "C:\\Users\\ziad emad\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "enforcement": "static educational screen + isolated interpreter (-I) + temp working directory + timeout"
+        }
+      }
+    },
+    {
+      "id": "q_essay_trace",
+      "question": "Starting from Code Block {{block:b_counter_trace}}, exactly these three lines are appended in order:\n`x = c.advance()`\n`y = c.advance()`\n`print(x, y, c.value)`\nGive the printed output and explain the state after each method call.",
+      "essay_style": "trace_explain",
+      "difficulty": "hard",
+      "code_block_id": "b_counter_trace",
+      "variant": {
+        "base_block_id": "b_counter_trace",
+        "reset": true,
+        "operations": [
+          {
+            "op": "append",
+            "text": "x = c.advance()"
+          },
+          {
+            "op": "append",
+            "text": "y = c.advance()"
+          },
+          {
+            "op": "append",
+            "text": "print(x, y, c.value)"
+          }
+        ]
+      },
+      "model_answer": [
+        "First call changes 4 to 7 and assigns x = 7.",
+        "Second call changes 7 to 10 and assigns y = 10.",
+        "Final state is 10; output is `7 10 10`."
+      ],
+      "explanation": "State advances across the two calls within this one question.",
+      "answer_verified": true,
+      "sources": [
+        {
+          "kind": "document",
+          "document": "Synthetic teaching premises",
+          "locator": "CODE-SAMPLES.md, Synthetic teaching premises",
+          "evidence": "Synthetic teaching premises (public fixture): Python constructors initialize instance attributes; methods access self; return passes a value without printing it; print writes its arguments; each independent question starts from the original code; range(1, n + 1) includes integers 1 through n; % gives the remainder; // is integer division for positive operands. The API premises teach isna(), sum(), dropna(), head(), and describe()."
+        }
+      ],
+      "execution": {
+        "question_id": "q_essay_trace",
+        "program_hash": "461751669b2fed6b7dd033bc9b4da566b7de6deb3e5daf356afa32c8c6956635",
+        "runtime": {
+          "language": "python",
+          "version": "3.14.7",
+          "executable": "C:\\Users\\ziad emad\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "enforcement": "static educational screen + isolated interpreter (-I) + temp working directory + timeout"
+        },
+        "status": "passed",
+        "execution_verified": true,
+        "reason": null,
+        "cases": [
+          {
+            "expected_stdout": "7 10 10\n",
+            "observed": {
+              "stdout": "7 10 10\n",
+              "stderr": "",
+              "exit_status": 0
+            },
+            "match": true
+          }
+        ]
+      }
+    }
+  ]
+}

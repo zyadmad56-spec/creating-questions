@@ -1,0 +1,70 @@
+[
+  {
+    "case_id": "bad_two_valid_options",
+    "draft": {
+      "question": "Which pandas expression removes missing values?",
+      "options": [
+        "data.dropna()",
+        "data.dropna(axis=0)",
+        "data.isna().sum()",
+        "data.describe()"
+      ],
+      "key": "A"
+    },
+    "finding": "Both A and B are correct as stated (axis=0 is the default), so the item has two defensible keys.",
+    "disposition": "Excluded; repaired as q_isna with a task constrained to counting missing cells per column, giving exactly one defensible answer."
+  },
+  {
+    "case_id": "bad_printed_key_contradiction",
+    "draft": {
+      "question": "What is the exact output printed to the terminal after executing line 9 of the Demo listing?",
+      "options": [
+        "30",
+        "10",
+        "AttributeError",
+        "No output"
+      ],
+      "printed_key": "B"
+    },
+    "finding": "Line 9 is `obj = Demo()` — a bare assignment that prints nothing. The printed key (10) contradicts the shown code; this is the supplied mockup's content defect.",
+    "disposition": "Excluded; the corrected reference asks about the print statement through stable line IDs (see q_essay_trace and q_value)."
+  },
+  {
+    "case_id": "bad_inherited_constructor",
+    "draft": {
+      "question": "Which constructor runs for class Child(Parent) with no __init__ of its own?",
+      "options": [
+        "Child's own",
+        "Parent's inherited __init__",
+        "object.__init__ only",
+        "No constructor runs"
+      ],
+      "key": "B or C"
+    },
+    "finding": "B and C are both defensible without the source stating the MRO rule, and the synthetic premises do not teach inheritance resolution.",
+    "disposition": "Excluded; outside the taught scope in source-only mode."
+  },
+  {
+    "case_id": "bad_return_vs_print",
+    "draft": {
+      "question": "What does the statement c.advance() produce?",
+      "options": [
+        "7",
+        "None",
+        "No output",
+        "AttributeError"
+      ],
+      "key": "C"
+    },
+    "finding": "Without stating whether the value is printed, assigned, or ignored, 'No output' and 'returns 7 unused' are both defensible readings.",
+    "disposition": "Repaired as q_return, which specifies that only c.advance() is appended to the block and asks what is printed."
+  },
+  {
+    "case_id": "bad_false_line_reference",
+    "draft": {
+      "question": "What is printed after executing line 13 of the score listing?"
+    },
+    "finding": "The score listing has 8 logical lines; prose line numbers drift from the rendered document and the cited line does not exist.",
+    "disposition": "Excluded; all accepted items reference lines through stable {{line:}}/{{block:}} tokens resolved from the manifest."
+  }
+]

@@ -77,8 +77,12 @@ def render_unit(document, model, manifest, unit, section, card, tokens):
             language = model["code_blocks"][block_id]["language"]
             version = block.get("version_hint") or ""
             label = f"Language: {language}{(' ' + version) if version else ''}"
+            if first == last:
+                range_text = f"Question {first}"
+            else:
+                range_text = f"Questions {first} to {last}"
             add_code_card(document, code_lines(model, block_id), language,
-                          f"Code Block {block['display_number']} — Questions {first} to {last}",
+                          f"Code Block {block['display_number']} — {range_text}",
                           label, tokens, highlighter)
         else:
             for line in code_lines(model, block_id):
@@ -134,12 +138,27 @@ def essay_answer_lines(question):
     return lines
 
 
+def plain_text(text):
+    """Answer-table cells carry the content only; backtick markers are not content."""
+    from qbank_render import CHIP_SPAN
+    return CHIP_SPAN.sub(lambda match: match.group(1), text)
+
+
 def answer_text(question, manifest):
     if question["section"] == "mcqs":
         return mcq_answer_text(question, manifest)
     if question["section"] == "true_false":
         return question["correct"]
     return "\n".join(essay_answer_lines(question))
+
+
+def fill_answer_cells(cells, content):
+    for cell, text in zip(cells, content):
+        cell.text = plain_text(text)
+        for paragraph in cell.paragraphs:
+            paragraph.paragraph_format.space_after = Pt(3)
+            for run in paragraph.runs:
+                run.font.size = Pt(10)
 
 
 def source_label(source, registry, source_mode):
@@ -169,15 +188,6 @@ def source_label(source, registry, source_mode):
         return f"{outside}: Web: {source['title']}\n{source['url']}"
     return (f"{outside}: General knowledge from model; checked against "
             f"{source['verified_against']}")
-
-
-def fill_answer_cells(cells, content):
-    for cell, text in zip(cells, content):
-        cell.text = text
-        for paragraph in cell.paragraphs:
-            paragraph.paragraph_format.space_after = Pt(3)
-            for run in paragraph.runs:
-                run.font.size = Pt(10)
 
 
 def add_answer_key(document, model, manifest, sections_order):
