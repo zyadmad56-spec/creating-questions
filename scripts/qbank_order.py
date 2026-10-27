@@ -156,6 +156,7 @@ def finalize_order(model, seed=None):
         "difficulty_counts": model["difficulty_counts"],
         "question_numbers": question_numbers,
         "sections": {section: [{"kind": unit["kind"], "unit_id": unit["id"],
+                                "code_block_id": unit["code_block_id"],
                                 "questions": unit["numbers"]}
                                for unit in unit_records[section]]
                      for section in QUESTION_TYPES},

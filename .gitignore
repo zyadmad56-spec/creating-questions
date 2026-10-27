@@ -10,3 +10,6 @@ settings.json
 formats/
 .DS_Store
 Thumbs.db
+evals/files/copy_prototype/*.docx
+evals/files/copy_prototype/*.pdf
+evals/files/copy_prototype/*.manifest.json

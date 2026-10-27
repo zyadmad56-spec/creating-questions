@@ -1,0 +1,2 @@
+# Optional local integration dependencies (Word COM conversion and copy checks on Windows)
+pywin32>=306 ; sys_platform == "win32"

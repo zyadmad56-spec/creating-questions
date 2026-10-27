@@ -3,21 +3,27 @@ import copy
 import json
 import random
 import re
-import unicodedata
-from collections import Counter
+import sys
 from pathlib import Path
-from urllib.parse import urlparse
 
 from docx import Document
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 from docx.shared import Inches, Pt
 
-
 SKILL_DIR = Path(__file__).resolve().parents[1]
-DEFAULT_TEMPLATE = SKILL_DIR / "assets" / "Creating Questions.docx"
+SCRIPTS_DIR = SKILL_DIR / "scripts"
+if str(SCRIPTS_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPTS_DIR))
+
+from qbank_document import DEFAULT_TEMPLATE, build_pdf_from_docx, build_v2_docx  # noqa: E402
+from qbank_schema import (SOURCE_MODES, SchemaError, normalized_text,  # noqa: E402
+                          validate_legacy_bank)
+
+# Shared validation lives in qbank_schema; keep the historical name working.
+validate_bank = validate_legacy_bank
+
 DIFFICULTIES = {"easy", "medium", "hard"}
-SOURCE_MODES = {"source_only", "source_web_general", "pdf_only", "pdf_web_general"}
 SECTION_INSTRUCTIONS = {
     "mcqs": "Choose one answer for each question.",
     "true_false": "Mark each statement True or False.",
@@ -29,162 +35,9 @@ SECTION_TITLES = {
 }
 
 
-def required_text(record, field):
-    content = record.get(field)
-    if not isinstance(content, str) or not content.strip():
-        raise ValueError(f"{field} must be nonempty text")
-    return content.strip()
-
-
-def normalized_text(text):
-    normalized = unicodedata.normalize("NFKC", text).casefold()
-    return " ".join(normalized.split()).rstrip(".?!\u061f")
-
-
-def validate_pdf_source(source):
-    required_text(source, "document")
-    page = source.get("pdf_page")
-    if type(page) is not int or page < 1:
-        raise ValueError("pdf_page must be a positive 1-based integer")
-
-
-def validate_slides_source(source):
-    required_text(source, "document")
-    slide = source.get("slide")
-    if type(slide) is not int or slide < 1:
-        raise ValueError("slide must be a positive 1-based integer")
-
-
-def validate_document_source(source):
-    required_text(source, "document")
-    required_text(source, "locator")
-    if "page" in source and (type(source["page"]) is not int or source["page"] < 1):
-        raise ValueError("page must be a positive 1-based integer when supplied")
-
-
-def validate_web_source(source):
-    required_text(source, "title")
-    address = urlparse(required_text(source, "url"))
-    if address.scheme not in {"http", "https"} or not address.netloc:
-        raise ValueError("Web source must have a direct HTTP(S) URL")
-
-
-def validate_general_source(source):
-    required_text(source, "verified_against")
-
-
-SOURCE_VALIDATORS = {"pdf": validate_pdf_source, "pdf_inference": validate_pdf_source,
-                     "slides": validate_slides_source, "slides_inference": validate_slides_source,
-                     "document": validate_document_source, "document_inference": validate_document_source,
-                     "web": validate_web_source, "general": validate_general_source}
-
-
-def validate_sources(question, source_mode):
-    sources = question.get("sources")
-    if not isinstance(sources, list) or not sources:
-        raise ValueError("Each question needs nonempty sources")
-    for source in sources:
-        kind = source.get("kind")
-        if kind not in SOURCE_VALIDATORS:
-            raise ValueError(f"Unknown source kind: {kind}")
-        if source_mode == "pdf_only" and kind not in {"pdf", "pdf_inference"}:
-            raise ValueError("External sources are forbidden in pdf_only mode")
-        if source_mode == "source_only" and kind in {"web", "general"}:
-            raise ValueError("External sources are forbidden in source_only mode")
-        required_text(source, "evidence")
-        SOURCE_VALIDATORS[kind](source)
-
-
-def validate_mcq(question):
-    options = question.get("options")
-    if not isinstance(options, list) or len(options) != 4:
-        raise ValueError("MCQ needs exactly four options")
-    if any(not isinstance(option, str) or not option.strip() for option in options):
-        raise ValueError("MCQ options must be nonempty text")
-    if len({normalized_text(option) for option in options}) != 4:
-        raise ValueError("MCQ options must be distinct")
-    if question.get("correct") not in {"A", "B", "C", "D"}:
-        raise ValueError("MCQ correct must be A, B, C, or D")
-
-
-def validate_true_false(question):
-    if question.get("correct") not in {"True", "False"}:
-        raise ValueError("True/False correct must be True or False")
-    if question["correct"] == "False":
-        required_text(question, "correction")
-
-
-def validate_essay(question):
-    points = question.get("model_answer")
-    if not isinstance(points, list) or not points:
-        raise ValueError("Essay needs a nonempty list of model-answer points")
-    if any(not isinstance(point, str) or not point.strip() for point in points):
-        raise ValueError("Essay answer points must be nonempty text")
-
-
-QUESTION_VALIDATORS = {"mcqs": validate_mcq, "true_false": validate_true_false,
-                       "essays": validate_essay}
-
-
-def validate_counts(bank, section):
-    questions = bank.get(section, [])
-    expected = bank["counts"].get(section)
-    quotas = bank["difficulty_counts"].get(section, {})
-    if type(expected) is not int or expected < 0 or expected != len(questions):
-        raise ValueError(f"Question count mismatch for {section}")
-    if set(quotas) != DIFFICULTIES:
-        raise ValueError(f"All three difficulty counts are required for {section}")
-    if any(type(count) is not int or count < 0 for count in quotas.values()):
-        raise ValueError("Difficulty counts must be nonnegative integers")
-    if sum(quotas.values()) != expected:
-        raise ValueError(f"Difficulty totals do not match {section}")
-    observed = Counter(question.get("difficulty") for question in questions)
-    if any(observed[difficulty] != quotas[difficulty] for difficulty in DIFFICULTIES):
-        raise ValueError(f"Actual difficulty distribution does not match {section}")
-
-
-def validate_question(question, section, source_mode):
-    stem_field = "statement" if section == "true_false" else "question"
-    required_text(question, stem_field)
-    required_text(question, "explanation")
-    if question.get("difficulty") not in DIFFICULTIES:
-        raise ValueError("Invalid question difficulty")
-    if question.get("answer_verified") is not True:
-        raise ValueError("Complete the source-based answer audit before exporting")
-    validate_sources(question, source_mode)
-    QUESTION_VALIDATORS[section](question)
-
-
-def validate_sections(bank):
-    seen_stems = set()
-    for section in QUESTION_VALIDATORS:
-        validate_counts(bank, section)
-        for question in bank.get(section, []):
-            validate_question(question, section, bank["source_mode"])
-            stem = normalized_text(question.get("question", question.get("statement", "")))
-            if stem in seen_stems:
-                raise ValueError(f"Repeated question: {stem}")
-            seen_stems.add(stem)
-
-
-def validate_bank(bank):
-    required_text(bank, "title")
-    if bank.get("source_mode") not in SOURCE_MODES:
-        raise ValueError("Explicit source_mode is required")
-    for field in ("counts", "difficulty_counts"):
-        if not isinstance(bank.get(field), dict) or set(bank[field]) != set(QUESTION_VALIDATORS):
-            raise ValueError(f"{field} must contain mcqs, true_false, and essays")
-    if bank.get("language", "en") not in SECTION_TITLES:
-        raise ValueError("language must be en; this skill produces English output")
-    if type(bank.get("include_answer_key", True)) is not bool:
-        raise ValueError("include_answer_key must be a boolean")
-    validate_sections(bank)
-    if sum(bank["counts"].values()) < 1:
-        raise ValueError("A question bank must contain at least one question")
-
-
 def shuffled_sections(bank):
-    sections = copy.deepcopy({section: bank.get(section, []) for section in QUESTION_VALIDATORS})
+    sections = copy.deepcopy({section: bank.get(section, []) for section in
+                              ("mcqs", "true_false", "essays")})
     rng = random.SystemRandom()
     for section, questions in sections.items():
         rng.shuffle(questions)
@@ -194,12 +47,6 @@ def shuffled_sections(bank):
                 rng.shuffle(question["options"])
                 question["correct"] = "ABCD"[question["options"].index(correct_text)]
     return sections
-
-
-def clear_body(document):
-    for child in list(document._body._element):
-        if child.tag != qn("w:sectPr"):
-            document._body._element.remove(child)
 
 
 def set_text_direction(paragraph):
@@ -354,10 +201,16 @@ def add_answer_key(document, answers, language, registry=None):
         fill_answer_cells(table.add_row().cells, answer)
 
 
-def build_docx(bank, output_path, template_path=DEFAULT_TEMPLATE):
-    validate_bank(bank)
+def build_docx(bank, output_path, template_path=DEFAULT_TEMPLATE,
+               format_id=None, variant=None):
+    """Export an audited bank. Version 2 banks dispatch to the new pipeline."""
+    if isinstance(bank, dict) and bank.get("schema_version") == 2:
+        return build_v2_docx(bank, output_path, template_path, format_id, variant)
+    validate_legacy_bank(bank)
     document = Document(str(template_path))
-    clear_body(document)
+    for child in list(document._body._element):
+        if child.tag != qn("w:sectPr"):
+            document._body._element.remove(child)
     title = document.add_paragraph(bank["title"].strip(), style="Title")
     set_text_direction(title)
     language = bank.get("language", "en")
@@ -373,14 +226,26 @@ def build_docx(bank, output_path, template_path=DEFAULT_TEMPLATE):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Export an audited document or slide question bank as DOCX.")
+    parser = argparse.ArgumentParser(description="Export an audited document or slide question bank as DOCX (and optionally PDF).")
     parser.add_argument("input_json")
     parser.add_argument("output_docx")
     parser.add_argument("--template", default=str(DEFAULT_TEMPLATE))
+    parser.add_argument("--format", default=None, dest="format_id",
+                        help="Document format for version-2 banks: classic (default) or a Card/saved format id")
+    parser.add_argument("--variant", default=None,
+                        help="Card variant: monokai (default) or print")
+    parser.add_argument("--pdf", default=None, metavar="OUTPUT_PDF",
+                        help="Also convert the finalized DOCX to this PDF path")
     arguments = parser.parse_args()
     with open(arguments.input_json, encoding="utf-8") as question_file:
         bank = json.load(question_file)
-    build_docx(bank, arguments.output_docx, Path(arguments.template))
+    build_docx(bank, arguments.output_docx, Path(arguments.template),
+               arguments.format_id, arguments.variant)
+    if arguments.pdf:
+        result = build_pdf_from_docx(arguments.output_docx, arguments.pdf)
+        if result["status"] != "converted":
+            parser.exit(2, f"PDF conversion unavailable: {result['reason']}\n")
+        print(result)
 
 
 if __name__ == "__main__":
