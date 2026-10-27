@@ -105,6 +105,39 @@ def code_hash(code_text):
     return hashlib.sha256(code_text.encode("utf-8")).hexdigest()
 
 
+def effective_program(model, base_block_id, variant=None):
+    """Exact effective code for a question: baseline lines plus variant operations.
+
+    Operations reference stable line IDs (append, replace, insert_after,
+    delete). Returns (code_text, line_id_to_number map for the effective text).
+    """
+    block = model["code_blocks"][base_block_id]
+    lines = list(block["lines"])
+    if variant:
+        if variant.get("base_block_id") and variant["base_block_id"] != base_block_id:
+            raise SchemaError(f"Variant base block {variant['base_block_id']} does not "
+                              f"match {base_block_id}")
+        for operation in variant.get("operations") or []:
+            op = operation.get("op")
+            line_id = operation.get("line_id")
+            position = next((index for index, line in enumerate(lines)
+                             if line["id"] == line_id), None)
+            if op in ("replace", "delete", "insert_after") and position is None:
+                raise SchemaError(f"Unknown line id {line_id!r} for {op} in block {base_block_id}")
+            if op == "append":
+                lines.append({"id": f"_{len(lines) + 1}", "text": operation.get("text", "")})
+            elif op == "replace":
+                lines[position] = {"id": line_id, "text": operation.get("text", "")}
+            elif op == "delete":
+                del lines[position]
+            elif op == "insert_after":
+                lines.insert(position + 1,
+                             {"id": f"_{position + 2}", "text": operation.get("text", "")})
+    text = "\n".join(line["text"] for line in lines)
+    numbers = {line["id"]: index for index, line in enumerate(lines, 1)}
+    return text, numbers
+
+
 # ---------------------------------------------------------------------------
 # Legacy (versionless) validation and adapter
 # ---------------------------------------------------------------------------
