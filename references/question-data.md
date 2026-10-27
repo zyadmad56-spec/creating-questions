@@ -2,6 +2,8 @@
 
 Save UTF-8 JSON in a task working directory. The template is resolved relative to the skill directory; use a Python environment with `python-docx`. Banks missing quotas or evidence are rejected; complete the audit before export.
 
+Two bank shapes are accepted. **Legacy banks** (no `schema_version`, or `"schema_version": 1`) use the flat shape documented below and stay fully compatible. **Version 2 banks** (`"schema_version": 2`) add stable IDs, shared code blocks, groups, dependency chains, essay styles, and execution records; see the Version 2 section. An unsupported explicit version is rejected with a clear message.
+
 ## Bank settings
 
 ```json
@@ -129,3 +131,16 @@ python evals/test_formatter.py
 ```
 
 `evals/files/sample_questions.json` is a synthetic formatter fixture, not a bank derived from a real university PDF and not a difficulty-quality benchmark.
+
+## Version 2 banks (programming)
+
+Set `"schema_version": 2`. See `evals/files/schema/counter_bank.json` for a complete runnable example. Version 2 keeps every legacy setting and adds:
+
+- **`code_blocks`:** each has a stable `id` (letters, digits, `-`, `_`; no spaces or colons), `language`, optional `version_hint`, `origin` (`extracted_from_source`, `authored_from_source`, or `repaired_from_source`), `review_status`, an ordered `lines` list of `{id, text}` (logical lines; blank lines and indentation preserved), and `sources`. Reference tokens are forbidden inside code text.
+- **`groups`:** `{id, type, difficulty, code_block_id, dependency_mode, question_ids}` — one type and one difficulty; at least two questions; `dependency_mode` is `independent` or `linked`. A linked group is hard-only, needs the bank's `programming.allow_hard_dependencies` permission, and fixes its internal question order. Dependencies must point to earlier members, so cycles and forward references are structurally rejected.
+- **Questions with stable IDs:** each question carries `id`, `section`-implied fields, and for MCQs structured options: a list of four `{id, text}` plus `correct_option_id` (independent of displayed letters). Optional `variant` (`{base_block_id, reset, operations}` with `append`/`replace`/`insert_after`/`delete` by stable `line_id`) describes the exact effective program. Optional `execution` records `{status, execution_verified, reason, cases}` with status `passed`, `failed`, `unavailable`, `not_applicable`, or `not_run`; only `passed` may carry `execution_verified: true`.
+- **Essay extras:** `essay_style` (`scenario`, `completion`, `bug_fix`, `trace_explain`), optional `reference_solution`, and test/trace cases. When `programming.essay_styles` is present, the questions' style counts and per-style difficulty counts must match it exactly.
+- **Reference tokens:** `{{q:id}}`, `{{block:id}}`, and `{{line:block:line_id}}` may appear in question text, options, explanations, corrections, and essay points. They resolve to final display numbers after ordering and are rejected if they name an unknown id. They never appear inside code.
+- **Draft vs final:** normalization accepts a draft (`answer_verified: false`); export validation (`final=True`) rejects it. Legacy banks always validate as final.
+
+The exporter normalizes (legacy adapter or v2), validates, forms render units (each group atomic, each standalone question a singleton), shuffles units within each section, shuffles MCQ options, assigns continuous question numbers and per-block line numbers, and resolves tokens — recording everything in a render manifest with code hashes, option-letter maps, and linked-group ranges. A code block may render in only one place; group its questions instead of repeating it.

@@ -1,0 +1,89 @@
+{
+  "schema_version": 2,
+  "title": "Synthetic Counter Fixture",
+  "language": "en",
+  "source_mode": "source_only",
+  "counts": {"mcqs": 2, "true_false": 0, "essays": 0},
+  "difficulty_counts": {
+    "mcqs": {"easy": 2, "medium": 0, "hard": 0},
+    "true_false": {"easy": 0, "medium": 0, "hard": 0},
+    "essays": {"easy": 0, "medium": 0, "hard": 0}
+  },
+  "include_answer_key": true,
+  "programming": {"allow_hard_dependencies": false},
+  "deliverables": ["docx", "pdf"],
+  "format": {"profile_id": "builtin-card", "variant": "monokai"},
+  "code_blocks": [
+    {
+      "id": "b_counter",
+      "language": "python",
+      "version_hint": "3.x",
+      "origin": "authored_from_source",
+      "review_status": "needs_review",
+      "lines": [
+        {"id": "L1", "text": "class Counter:"},
+        {"id": "L2", "text": "    def __init__(self, value):"},
+        {"id": "L3", "text": "        self.value = value"},
+        {"id": "L4", "text": "    def advance(self):"},
+        {"id": "L5", "text": "        self.value += 3"},
+        {"id": "L6", "text": "        return self.value"},
+        {"id": "L7", "text": "c = Counter(4)"}
+      ],
+      "sources": [{"kind": "document_inference", "document": "Synthetic teaching premises",
+        "locator": "CODE-SAMPLES.md, Synthetic teaching premises",
+        "evidence": "Constructors initialize attributes; methods use self; return does not print."}]
+    }
+  ],
+  "groups": [
+    {"id": "g_counter", "type": "mcqs", "difficulty": "easy", "code_block_id": "b_counter",
+     "dependency_mode": "independent", "question_ids": ["q_value", "q_return"]}
+  ],
+  "mcqs": [
+    {
+      "id": "q_value",
+      "question": "What is printed if print(c.value) is appended to Code Block {{block:b_counter}}?",
+      "difficulty": "easy",
+      "code_block_id": "b_counter",
+      "options": [
+        {"id": "o_value_4", "text": "4"},
+        {"id": "o_value_7", "text": "7"},
+        {"id": "o_value_none", "text": "No output"},
+        {"id": "o_value_error", "text": "AttributeError"}
+      ],
+      "correct_option_id": "o_value_4",
+      "variant": {"base_block_id": "b_counter", "reset": true,
+        "operations": [{"op": "append", "text": "print(c.value)"}]},
+      "depends_on": [],
+      "explanation": "The constructor sets value to 4; no advance call has occurred.",
+      "answer_verified": false,
+      "sources": [{"kind": "document_inference", "document": "Synthetic teaching premises",
+        "locator": "CODE-SAMPLES.md, Synthetic teaching premises",
+        "evidence": "The constructor initializes the instance attribute from the supplied value."}],
+      "execution": {"status": "not_run", "execution_verified": false, "reason": "Planning draft.", "cases": []}
+    },
+    {
+      "id": "q_return",
+      "question": "What is printed if only c.advance() is appended to the original block?",
+      "difficulty": "easy",
+      "code_block_id": "b_counter",
+      "options": [
+        {"id": "o_return_4", "text": "4"},
+        {"id": "o_return_7", "text": "7"},
+        {"id": "o_return_none", "text": "None"},
+        {"id": "o_return_silent", "text": "No output"}
+      ],
+      "correct_option_id": "o_return_silent",
+      "variant": {"base_block_id": "b_counter", "reset": true,
+        "operations": [{"op": "append", "text": "c.advance()"}]},
+      "depends_on": [],
+      "explanation": "The method returns a value, but the appended statement does not print it.",
+      "answer_verified": false,
+      "sources": [{"kind": "document_inference", "document": "Synthetic teaching premises",
+        "locator": "CODE-SAMPLES.md, Synthetic teaching premises",
+        "evidence": "Return passes a value without printing it."}],
+      "execution": {"status": "not_run", "execution_verified": false, "reason": "Planning draft.", "cases": []}
+    }
+  ],
+  "true_false": [],
+  "essays": []
+}
