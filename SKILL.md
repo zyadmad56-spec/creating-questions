@@ -76,7 +76,7 @@ Record sources and concise evidence for each draft question. A locator alone doe
 
 **Coverage/order:** cover all selected areas broadly. Separate sections in this order: MCQ, True/False, essay; omit unused types. Shuffle questions **within each section**, so easy/medium/hard are interspersed. Do not sort by chapter or difficulty, impose an alternating difficulty cycle, or print difficulty labels next to questions.
 
-**MCQ:** exactly four options A–D, exactly one defensible correct choice. Use plausible distractors based on common confusions. Keep options comparable in length, specificity, grammar, and style. Do not make the correct answer consistently the longest or the only verbatim PDF phrase; do not pad distractors or truncate important qualifications to equalize length. Review grammar, repeated wording, precision, and length for answer cues. Avoid choices that depend on option positions (such as “A and C” or “all of the above”) because the formatter shuffles options.
+**MCQ:** exactly four options A–D, exactly one defensible correct choice. Use plausible distractors based on common confusions. Keep options comparable in length, specificity, grammar, and style. Do not make the correct answer consistently the longest or the only verbatim PDF phrase; do not pad distractors or truncate important qualifications to equalize length. Standing user rule (confirm it in every bank interview): when a longest-option cue appears, **lengthen the distractors to match — never shorten the correct option**, which must keep its full wording. Review grammar, repeated wording, precision, and length for answer cues. Avoid choices that depend on option positions (such as “A and C” or “all of the above”) because the formatter shuffles options.
 
 **True/False:** one clear claim whose truth is decidable from the source. Include both true and false content when feasible without a mandated ratio. Negation is not an answer cue: "not" may occur in a true claim, and a positive claim may be false. Avoid confusing double negatives and microscopic wording tricks. Every false item needs a source-supported correction.
 
@@ -116,3 +116,14 @@ The formatter enforces structural counts, source records, required answers, grou
 Preserve the bundled template's page geometry, heading/list styles, and answer-table style. Render the DOCX and inspect all pages for numbering, unclipped options, readable English text and tables, and page breaks. If no rendering tool is available, perform structural checks and disclose the visual-check limitation; do not claim visual verification.
 
 If explicitly requested, provide a PDF or a student-only file (`include_answer_key: false`). Keep the internal audited answers even in student-only mode. Do not generate extra deliverables unless requested.
+
+## Standing user preferences (QHNU) — fixed rules for every bank
+
+These are standing decisions from the user, applied to every future bank without re-asking:
+
+1. **No trivia or history fillers.** Never ask who created/maintained a language, which company or team owns it, or historical dates (people, labs, years). Identity facts that describe the language itself (e.g. "R is based on the S language") are allowed. Replace any removed trivia with usage questions at the same difficulty.
+2. **No manual calculation.** Questions must never require mentally executing statistics (regression coefficients, correlation values, test statistics, p-values) or heavy arithmetic. Allowed: reading a ready-made output quoted from the source or the question (interpret it, decide reject/fail-to-reject), reasoning about function behavior, and trivial arithmetic (median by ordering, max − min, counting a few occurrences). Code-output questions must be answerable by reading the code, not by hand-computing statistics.
+3. **Small shared code blocks.** Code blocks stay short (about 3-6 lines) and carry 2-3 questions each, never more.
+4. **Tight code-card gutter.** Line numbers sit close to the code with minimal padding; the code text starts near the left edge of the card. Keep numbers (questions may reference line numbers) but never leave a wide empty band before the code.
+5. **Never split a question's options across pages.** Option tables and option paragraph groups stay together, and a code card is never left orphaned at a page bottom away from its first question.
+6. **Render/helper changes stay local until the user approves a commit.** Batch skill changes on disk; the user decides when they are committed to the working branch.

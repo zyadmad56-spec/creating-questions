@@ -103,7 +103,14 @@ def add_code_runs(paragraph, line_runs, tokens, style):
 
 def gutter_width_in(lines_count):
     digits = max(len(str(lines_count)), 1)
-    return 0.38 + 0.12 * max(digits - 1, 1)
+    return 0.26 + 0.08 * max(digits - 1, 0)
+
+
+def keep_row_intact(row):
+    """Prevent a table row from splitting across pages (Word ignores this when
+    the row is taller than a page, so long listings still split safely)."""
+    properties = row._tr.get_or_add_trPr()
+    properties.append(OxmlElement("w:cantSplit"))
 
 
 def add_code_card(document, code_lines, language, header_left, header_right, tokens,
@@ -117,22 +124,30 @@ def add_code_card(document, code_lines, language, header_left, header_right, tok
     table = document.add_table(rows=2, cols=2)
     remove_table_borders(table)
     table.autofit = False
+    keep_row_intact(table.rows[0])
+    keep_row_intact(table.rows[1])
     gutter, code = table.rows[1].cells
     total_width = 6.1
     gutter_in = gutter_width_in(len(lines))
     gutter.width = Inches(gutter_in)
     code.width = Inches(total_width - gutter_in)
+    # The fixed layout resolves an ambiguous grid (default equal columns) to
+    # different widths per table, overflowing the margin; align gridCol with
+    # the designed cell widths so every card lays out identically.
+    table.columns[0].width = Inches(gutter_in)
+    table.columns[1].width = Inches(total_width - gutter_in)
     header_cell = table.rows[0].cells[0].merge(table.rows[0].cells[1])
     header_cell.width = Inches(total_width)
     shade_cell(header_cell, tokens["header"])
     shade_cell(gutter, tokens["gutter"])
     shade_cell(code, tokens["code"])
-    set_cell_margins(gutter, left=60, right=60)
-    set_cell_margins(code)
+    set_cell_margins(gutter, left=20, right=30)
+    set_cell_margins(code, left=50)
     gutter.vertical_alignment = code.vertical_alignment = WD_CELL_VERTICAL_ALIGNMENT.TOP
 
     header_paragraph = header_cell.paragraphs[0]
     header_paragraph.paragraph_format.space_after = Pt(0)
+    header_paragraph.paragraph_format.keep_with_next = True
     header_paragraph.paragraph_format.tab_stops.add_tab_stop(
         Inches(total_width - 0.15), WD_TAB_ALIGNMENT.RIGHT)
     run = header_paragraph.add_run(header_left)
@@ -153,6 +168,9 @@ def add_code_card(document, code_lines, language, header_left, header_right, tok
         code_paragraph = code.paragraphs[0] if index == 0 else code.add_paragraph()
         add_code_runs(code_paragraph, lines[index], tokens, style)
         code_paragraph.paragraph_format.space_after = Pt(0)
+    # Keep the card attached to the question that follows it: a card must never
+    # sit orphaned at a page bottom with its questions on the next page.
+    code_paragraph.paragraph_format.keep_with_next = True
     return table
 
 
@@ -194,6 +212,13 @@ def add_options_block(document, options, tokens):
             paragraph = cell.paragraphs[0]
             add_chip_text(paragraph, f"{letter}) {text}", tokens)
             paragraph.paragraph_format.space_after = Pt(2)
+        # A question's options never split across pages: rows cannot split and the
+        # first row stays with the second.
+        for row in table.rows:
+            keep_row_intact(row)
+        for cell in table.rows[0].cells:
+            for paragraph in cell.paragraphs:
+                paragraph.paragraph_format.keep_with_next = True
         return table
     for index, (letter, text) in enumerate(styled):
         paragraph = document.add_paragraph(style="List Bullet 2")
